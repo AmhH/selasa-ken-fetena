@@ -52,12 +52,24 @@ public class Day2 {
         System.out.println(isHappy(10));
         System.out.println(isHappy(18));
         System.out.println(isHappy(20));
+
+        System.out.println("********************************");
+
+        Solution solution = new Solution();
+
+        System.out.println(solution.isHappy(19));
+        System.out.println(solution.isHappy(1));
+        System.out.println(solution.isHappy(7));
+        System.out.println(solution.isHappy(10));
+        System.out.println(solution.isHappy(18));
+        System.out.println(solution.isHappy(20));
+        System.out.println(""+Runtime.getRuntime().availableProcessors());
     }
 }
 
 class Solution {
     public boolean isHappy(int n) {
-        n = (int) Math.abs(n);
+        n = Math.abs(n);
         Set<Integer> exist = new HashSet<>();
         while (n != 1) {
             if (!exist.add(n)) {

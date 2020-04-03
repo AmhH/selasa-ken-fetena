@@ -19,7 +19,7 @@ public class Day1 {
     public int singleNumber(int[] nums) {
         int res = nums[0];
         for (int i = 1; i < nums.length; i++)
-            res = res ^nums[i];
+            res = res ^ nums[i];
 
         return res;
     }
@@ -35,5 +35,7 @@ public class Day1 {
     public static void main(String[] args) {
         System.out.println(new Day1().singleNumber(new int[] {2,2,1}));
         System.out.println(new Day1().singleNumber(new int[] {4,1,2,1,2}));
+        System.out.println(new Day1().singleNumber1(new int[] {2,2,1}));
+        System.out.println(new Day1().singleNumber1(new int[] {4,1,2,1,2}));
     }
 }
