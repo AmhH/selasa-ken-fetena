@@ -30,6 +30,25 @@ public class Day4 {
         }
     }
 
+    public void moveZeroes2(int[] nums) {
+        int numOfZeroes = 0;
+        int position = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            int cur = nums[i];
+            if (cur == 0) {
+                numOfZeroes ++;
+            } else {
+                nums[position] = nums[i];
+                position ++;
+            }
+        }
+
+        for (int i = nums.length - numOfZeroes; i < nums.length; i++) {
+            nums[i] = 0;
+        }
+    }
+
     public static void main(String[] args) {
         int[] nums1 = {0,1,0,3,12};
         int[] nums2 = {0,0,0,3,12,0,3};
