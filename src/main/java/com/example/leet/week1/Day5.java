@@ -42,7 +42,6 @@ public class Day5 {
     }
 
     public static int maxProfit2(int[] prices) {
-        // 画折线图辅助 1-2-3 1买3卖和1买2卖2买3卖一样
         int profit = 0;
         for(int i=0;i<prices.length-1;i++){
             if(prices[i+1]>prices[i])
