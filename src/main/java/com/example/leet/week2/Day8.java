@@ -42,6 +42,18 @@ public class Day8 {
         return head;
     }
 
+    public static ListNode middleNode2(ListNode head) { // O(len) O(1)
+        ListNode fakeHead = new ListNode(-1);
+        fakeHead.next = head;
+        ListNode ln0 = fakeHead;
+        ListNode ln1 = fakeHead;
+        while (ln1.next != null && ln1.next.next != null) {
+            ln0 = ln0.next;
+            ln1 = ln1.next.next;
+        }
+        return ln0.next;
+    }
+
     public static void main(String[] args) {
         //1,2,3,4,5
         ListNode head =  new ListNode(1);
@@ -54,7 +66,7 @@ public class Day8 {
         head3.next = head4;
         head4.next = head5;
 
-        ListNode listNode = middleNode(head);
+        ListNode listNode = middleNode2(head);
 
         while (listNode != null){
             System.out.print(listNode.val + ", ");
@@ -65,7 +77,7 @@ public class Day8 {
         //[1,2,3,4,5,6]
         head5.next = new ListNode(6);
 
-        ListNode listNode2 = middleNode(head);
+        ListNode listNode2 = middleNode2(head);
 
         while (listNode2 != null){
             System.out.print(listNode2.val + ", ");
