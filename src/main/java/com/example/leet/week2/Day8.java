@@ -74,8 +74,14 @@ public class Day8 {
         }
 
         System.out.println("***************");
-        //[1,2,3,4,5,6]
-        head5.next = new ListNode(6);
+        //[1,2,3,4,5,6,7,8]
+        ListNode head6 = new ListNode(6);
+        ListNode head7 = new ListNode(7);
+        ListNode head8 = new ListNode(8);
+
+        head5.next = head6;
+        head6.next = head7;
+        head7.next = head8;
 
         ListNode listNode2 = middleNode2(head);
 
