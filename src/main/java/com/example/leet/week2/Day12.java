@@ -37,6 +37,7 @@ public class Day12 {
             pq.offer(x);
         }
 
+        System.out.println(pq);
         while(pq.size() > 1){
             int a = pq.poll();
             int b = pq.poll();
