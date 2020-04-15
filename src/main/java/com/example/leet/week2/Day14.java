@@ -42,4 +42,40 @@ package com.example.leet.week2;
  * the final result is right shift), and perform it once.
  */
 public class Day14 {
+
+    /**
+     * https://developersinspired.com/2020/04/14/perform-string-shifts/
+     * @param s
+     * @param shift
+     * @return
+     */
+    public String stringShift(String s, int[][] shift) {
+        int sum = 0;
+        for (int[] array : shift){
+            if(array[0] == 0){
+                sum -= array[1];
+            }else{
+                sum += array[1];
+            }
+        }
+        int length = s.length();
+
+        if(Math.abs(sum) > length){
+            sum %= length;
+        }
+        if(sum > 0){
+            //Performing right reversal
+            int d = length - sum;
+            String result = s.substring(d) + s.substring(0,d);
+            return result;
+        }
+        else if(sum < 0){
+            //Performing left reversal
+            sum = Math.abs(sum);
+            String result = s.substring(sum) + s.substring(0,sum);
+            return result;
+        }
+
+        return s;
+    }
 }
