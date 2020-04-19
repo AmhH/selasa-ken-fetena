@@ -65,5 +65,45 @@ public class Day17 {
         }
     }
 
+    public static void main(String[] args) {
+        char[][] grid = {
+                {'1', '1', '1', '1', '0'},
+                {'1', '1', '0', '1', '0'},
+                {'1', '1', '0', '0', '0'},
+                {'0', '0', '0', '0', '0'}
+        };
 
+        char[][] grid2 = {
+                {'1', '1', '0', '0', '0'},
+                {'1', '1', '0', '0', '0'},
+                {'0', '0', '1', '0', '0'},
+                {'0', '0', '0', '1', '1'}
+        };
+
+        System.out.println(numIslands(grid));
+        System.out.println(numIslands(grid2));
+
+        System.out.println(Arrays.deepToString(grid));
+        System.out.println(Arrays.deepToString(grid2));
+
+        String[][] names = {
+                {"Sam", "Smith"},
+                {"Robert", "Delgro"},
+                {"James", "Gosling"},
+        };
+
+        // how to initialize two dimensional array in Java
+        // using for loop
+        int[][] board = new int[3][3];
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                board[i][j] = i + j;
+            }
+        }
+
+        System.out.println(Arrays.deepToString(names));
+        System.out.println(Arrays.deepToString(board));
+
+    }
 }
