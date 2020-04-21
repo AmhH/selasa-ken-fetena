@@ -50,6 +50,22 @@ public class Day20 {
         TreeNode(int x) { val = x; }
     }
 
+    public TreeNode bstFromPreorder1(int[] preorder) {
+        return build(preorder, 0, preorder.length);
+    }
+
+    private TreeNode build(int[] preorder, int l, int r) {
+        if (l >= r) return null;
+        TreeNode root = new TreeNode(preorder[l]);
+        for (int m = l + 1; m <= r; m++) {
+            if (m == r || preorder[m] > root.val) {
+                root.left = build(preorder, l + 1, m);
+                root.right = build(preorder, m, r);
+                break;
+            }
+        }
+        return root;
+    }
 
     public static void main(String[] args) {
         TreeNode root = bstFromPreorder(new int[]{8,5,1,7,10,12});
