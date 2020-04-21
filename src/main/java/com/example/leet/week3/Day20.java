@@ -20,4 +20,34 @@ package com.example.leet.week3;
  * The values of preorder are distinct.
  */
 public class Day20 {
+
+    public TreeNode bstFromPreorder(int[] preorder) {
+        return preOrderTraverse(preorder, 0, preorder.length - 1);
+    }
+
+    private TreeNode preOrderTraverse(int[] preOrder, int start, int end) {
+        if(start > end) return null;
+
+        TreeNode node = new TreeNode(preOrder[start]);
+        int i;
+        for(i=start;i<=end;i++) {
+            if(preOrder[i] > node.val)
+                break;
+        }
+
+        node.left = preOrderTraverse(preOrder, start+1, i-1);
+        node.right = preOrderTraverse(preOrder, i, end);
+        return node;
+    }
+
+    /**
+     * Definition for a binary tree node.
+     * */
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }
+
