@@ -21,11 +21,11 @@ package com.example.leet.week3;
  */
 public class Day20 {
 
-    public TreeNode bstFromPreorder(int[] preorder) {
+    public static TreeNode bstFromPreorder(int[] preorder) {
         return preOrderTraverse(preorder, 0, preorder.length - 1);
     }
 
-    private TreeNode preOrderTraverse(int[] preOrder, int start, int end) {
+    private static TreeNode preOrderTraverse(int[] preOrder, int start, int end) {
         if(start > end) return null;
 
         TreeNode node = new TreeNode(preOrder[start]);
@@ -43,11 +43,28 @@ public class Day20 {
     /**
      * Definition for a binary tree node.
      * */
-    public class TreeNode {
+    public static  class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
         TreeNode(int x) { val = x; }
+    }
+
+
+    public static void main(String[] args) {
+        TreeNode root = bstFromPreorder(new int[]{8,5,1,7,10,12});
+
+        TreeNode temp = root;
+
+        while(temp.left != null || temp.right != null){
+            System.out.print(temp.val);
+            System.out.print(", ");
+            System.out.print(temp.left.val);
+            System.out.print(", ");
+            System.out.print(temp.right.val);
+            System.out.print(", ");
+            temp = temp.left;
+        }
     }
 }
 
