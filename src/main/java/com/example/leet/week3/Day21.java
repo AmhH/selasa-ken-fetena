@@ -53,5 +53,36 @@ import java.util.List;
  */
 public class Day21 {
 
+    public int leftMostColumnWithOne(BinaryMatrix binaryMatrix) {
+        List<Integer> dimensions = binaryMatrix.dimensions();
+        int row = dimensions.get(0);
+        int column = dimensions.get(1);
 
+        if(row == 0 || column ==0)
+            return -1;
+
+        int result = -1;
+        int r = 0;
+        int c = column - 1;
+
+        while(r < row && c >= 0){
+            if(binaryMatrix.get(r, c) == 1){
+                result = c;
+                c--;
+            }else{
+                r++;
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * // This is the BinaryMatrix's API interface.
+     * // You should not implement it, or speculate about its implementation
+     */
+      interface BinaryMatrix {
+          int get(int x, int y);
+          List<Integer> dimensions();
+     }
 }
