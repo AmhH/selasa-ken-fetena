@@ -1,5 +1,8 @@
 package com.example.leet.week4;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Subarray Sum Equals K
  * Given an array of integers and an integer k, you need to find the total number of continuous subarrays whose sum
@@ -26,4 +29,49 @@ package com.example.leet.week4;
  * this property to optimize it.
  */
 public class Day22 {
+
+        //Prefix Sum + Hash Table - O(n) time, O(n) space (37ms beats 40.49%)
+
+        public static int subarraySum(int[] nums, int k) {
+            if (nums == null || nums.length == 0){
+                return 0;
+            }
+            int sum = 0;
+            int count = 0;
+            Map<Integer, Integer> map = new HashMap<>();
+            map.put(0, 1);
+            for (int i = 0; i < nums.length; i++) {
+                sum += nums[i];
+                if (map.containsKey(sum - k)) {
+                    count += map.get(sum - k);
+                }
+                map.put(sum, map.getOrDefault(sum, 0) + 1);
+            }
+            return count;
+
+        }
+
+        //Another implementation - Prefix Sum + Hash Table - O(n) time, O(n)
+        public static int subarraySum2(int[] nums, int k) {
+            if (nums == null || nums.length == 0) return 0;
+            int sum = 0;
+            int count = 0;
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int i = 0; i < nums.length; i++) {
+                sum += nums[i];
+                if (sum == k) {
+                    count++;
+                }
+                if (map.containsKey(sum - k)) {
+                    count += map.get(sum - k);
+                }
+                map.put(sum, map.getOrDefault(sum, 0) + 1);
+            }
+            return count;
+        }
+
+    public static void main(String[] args) {
+        System.out.println(subarraySum(new int[]{1,1,1}, 2));
+        System.out.println(subarraySum2(new int[]{1,1,1}, 2));
+    }
 }
