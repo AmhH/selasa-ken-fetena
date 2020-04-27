@@ -39,5 +39,59 @@ package com.example.leet.week4;
  */
 public class Day26 {
 
+    public int longestCommonSubsequence(String text1, String text2) {
+        int m = text1.length(), n = text2.length();
+        int[] ans = new int[n+1];
+
+        for (int i = m-1; i >= 0; i--) {
+            int[] tmp = new int[n+1];
+            for (int j = 0; j < n+1; j++) tmp[j] = ans[j];
+
+            for (int j = n-1; j >= 0; j--) {
+                if (text1.charAt(i) == text2.charAt(j)) ans[j] = 1 + tmp[j+1];
+                else ans[j] = Math.max(ans[j+1], tmp[j]);
+            }
+        }
+        return ans[0];
+    }
+
+    public int longestCommonSubsequence2(String text1, String text2) {
+        int[][] dp = new int[text1.length() + 1][text2.length() + 1];
+        for (int i = 0; i <= text1.length(); i++) {
+
+            for (int j = 0; j <= text2.length(); j++) {
+                if (i == 0 || j == 0) {
+                    dp[i][j] = 0;
+                    continue;
+                }
+                char c1 = text1.charAt(i - 1);
+                char c2 = text2.charAt(j - 1);
+                if (c1 == c2) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+
+        return dp[text1.length()][text2.length()];
+    }
+
+    int[][] dp;
+    public int longestCommonSubsequence3(String text1, String text2) {
+        int m = text1.length();
+        int n = text2.length();
+        dp = new int[m+1][n+1];
+        for(int i=1; i<=m; i++){
+            for(int j=1; j<=n; j++){
+                if(text1.charAt(i-1) == text2.charAt(j-1)){
+                    dp[i][j] = 1 + dp[i-1][j-1];
+                }else{
+                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+                }
+            }
+        }
+        return dp[m][n];
+    }
 
 }
