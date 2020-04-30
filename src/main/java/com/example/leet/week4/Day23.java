@@ -1,5 +1,8 @@
 package com.example.leet.week4;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *  Bitwise AND of Numbers Range
  * Given a range [m, n] where 0 <= m <= n <= 2147483647, return the bitwise AND of all numbers in this
