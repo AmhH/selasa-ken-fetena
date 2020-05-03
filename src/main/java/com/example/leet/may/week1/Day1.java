@@ -34,4 +34,8 @@ public class Day1 {
         }
         return left;
     }
+
+    private boolean isBadVersion(int mid) {
+        return false;
+    }
 }
