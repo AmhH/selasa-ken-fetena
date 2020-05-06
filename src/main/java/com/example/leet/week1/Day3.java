@@ -84,7 +84,7 @@ public class Day3 {
     }
 
     public static void main(String[] args) {
-        System.out.println(maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
+      /*  System.out.println(maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
         System.out.println(maxSubArray(new int[]{-2, -3, 4, -1, -2, 1, 5, -3}));
         System.out.println(maxSubArraySum(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
         System.out.println(maxSubArraySum(new int[]{-2, -3, 4, -1, -2, 1, 5, -3}));
@@ -92,7 +92,7 @@ public class Day3 {
         System.out.println(maxSubArraySum2(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
         System.out.println(maxSubArraySum2(new int[]{-2, -3, 4, -1, -2, 1, 5, -3}));
 
-        System.out.println(maxSubArrayBetter(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
+        System.out.println(maxSubArrayBetter(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));*/
         System.out.println(maxSubArrayBetter(new int[]{-2, -3, 4, -1, -2, 1, 5, -3}));
     }
 }
