@@ -29,4 +29,53 @@ package com.example.leet.may.week1;
  * Each node has a unique integer value from 1 to 100.
  */
 public class Day7 {
+
+    public boolean isCousins(TreeNode root, int x, int y) {
+        Pair pair1 = isCousinsHelper(root, x, null, 0);
+        Pair pair2 = isCousinsHelper(root, y, null, 0);
+
+        return pair1.level == pair2.level && pair1.parent != pair2.parent;
+
+    }
+
+    Pair isCousinsHelper(TreeNode root, int val, TreeNode parent, int level){
+        if(root == null){
+            return null;
+        }
+        if(root.val == val){
+            return new Pair(parent, level);
+        }
+        Pair leftPair = isCousinsHelper(root.left, val, root, level + 1);
+        Pair rightPair = isCousinsHelper(root.right, val, root, level + 1);
+        return leftPair == null ? rightPair : leftPair;
+    }
+
+    class Pair{
+        TreeNode parent;
+        int level;
+
+        Pair(TreeNode parent, int level){
+            this.parent = parent;
+            this.level = level;
+        }
+    }
+
+    /**
+     * Definition for a binary tree node.
+     */
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode() {}
+        TreeNode(int val) { this.val = val; }
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
 }
+
+
+
