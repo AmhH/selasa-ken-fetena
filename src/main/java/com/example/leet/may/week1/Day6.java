@@ -1,5 +1,8 @@
 package com.example.leet.may.week1;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,8 +35,44 @@ public class Day6 {
         return 0;
     }
 
+    public static int majorityElement2(int[] nums) {
+        int leader=nums[0],leader_count=1;
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]==leader) leader_count++;
+            else{
+                leader_count--;
+                if(leader_count==0){
+                    if(i<nums.length-1){
+                        leader=nums[i+1];
+                        leader_count=1;
+                        i++;
+                    }
+                }
+            }
+        }
+        return leader;
+
+    }
+
+    public int majorityElement3(int[] nums) {
+        int count = 0;
+        Integer candidate = null;
+
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+            count += (num == candidate) ? 1 : -1;
+        }
+
+        return candidate;
+    }
     public static void main(String[] args) {
         System.out.println(majorityElement(new int[]{3,2,3}));
         System.out.println(majorityElement(new int[]{2,2,1,1,1,2,2}));
+        System.out.println(majorityElement2(new int[]{2,2,1,1,1,1,1,2,2}));
+        System.out.println("a ".charAt(1));
+        System.out.println("To days date " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
     }
+
 }
