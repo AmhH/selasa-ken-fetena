@@ -1,5 +1,7 @@
 package com.example.leet.may.week2;
 
+import java.util.Arrays;
+
 /**
  * Flood Fill
  * An image is represented by a 2-D array of integers, each integer representing the pixel value of the image (from 0
@@ -33,4 +35,34 @@ package com.example.leet.may.week2;
  * Write a recursive function that paints the pixel if it's the correct color, then recurses on neighboring pixels.
  */
 public class Day11 {
+
+    public static int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        if(image[sr][sc] == newColor){
+            return image;
+        }
+        colorImage(image, sr, sc, image[sr][sc], newColor);
+        return image;
+    }
+
+    private static void colorImage(int[][] image, int sr, int sc, int oldColor, int newColor) {
+        if(sr < 0 || sr >= image.length || sc < 0 || sc >= image[sr].length || image[sr][sc] != oldColor){
+            return;
+        }
+
+        image[sr][sc] = newColor;
+        colorImage(image, sr+1, sc, oldColor, newColor);
+        colorImage(image, sr-1, sc, oldColor, newColor);
+        colorImage(image, sr, sc+1, oldColor, newColor);
+        colorImage(image, sr, sc-1, oldColor, newColor);
+    }
+
+    public static void main(String[] args) {
+        int[][] arr = {{1,1,1},{1,1,0},{1,0,1}};
+
+        System.out.println(Arrays.deepToString(arr));
+
+        floodFill(arr, 1, 1, 2);
+
+        System.out.println(Arrays.deepToString(arr));
+    }
 }
