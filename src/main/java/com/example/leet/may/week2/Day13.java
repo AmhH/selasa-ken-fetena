@@ -133,6 +133,7 @@ public class Day13 {
         }
         return left<=0?"0":new String(c, 0, left);
     }
+
     public static void main(String[] args) {
         System.out.println(removeKdigits("1432219", 3)); // 1219
         System.out.println(removeKdigits("10200", 1)); // 200
