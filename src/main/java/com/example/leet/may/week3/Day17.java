@@ -38,6 +38,30 @@ import java.util.List;
  */
 public class Day17 {
 
+    public static List<Integer> findAnagrams(String s, String p) {
+        int[] alphabets = new int[26];
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < p.length(); i++) {
+            alphabets[p.charAt(i) - 'a']++;
+        }
+
+        int start = 0, end = 0;
+        while (end < s.length()){
+            if(alphabets[s.charAt(end) - 'a'] > 0){
+                alphabets[s.charAt(end++) - 'a']--;
+                if(end - start == p.length()){
+                    list.add(start);
+                }
+            } else if(start == end){
+                start++;
+                end++;
+            }else{
+                alphabets[s.charAt(start++)-'a']++;
+            }
+
+        }
+        return list;
+    }
 
     public static void main(String[] args) {
         System.out.println(findAnagrams("cbaebabacd","abc"));
