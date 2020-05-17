@@ -1,6 +1,7 @@
 package com.example.leet.may.week3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -66,5 +67,27 @@ public class Day17 {
     public static void main(String[] args) {
         System.out.println(findAnagrams("cbaebabacd","abc"));
         System.out.println(findAnagrams("abab","ab"));
+    }
+
+    public List<Integer> findAnagrams2(String s, String p) {
+        int[]ss = new int[26];
+        int[]pp = new int[26];
+
+        for (char c: p.toCharArray())
+            pp[c-'a']++;
+        int n=p.length();
+        List<Integer>res = new ArrayList<>();
+
+        for (int i=0; i<s.length(); i++){
+            char c=s.charAt(i);
+            if (i>=n){
+                ss[s.charAt(i-n)-'a']--;
+            }
+            ss[c-'a']++;
+            if (Arrays.equals(ss,pp))
+                res.add(i-n+1);
+        }
+
+        return res;
     }
 }
