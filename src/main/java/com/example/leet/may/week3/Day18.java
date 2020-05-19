@@ -55,9 +55,11 @@ public class Day18 {
     public static void main(String[] args) {
         System.out.println(checkInclusion("ab", "eidbaooo"));
         System.out.println(checkInclusion("ab", "eidboaoo"));
+
+        System.out.println(checkInclusion2("ab", "eidbaoooab"));
     }
 
-    public boolean checkInclusion2(String s1, String s2) {
+    public static boolean checkInclusion2(String s1, String s2) {
         if (s1 == null) return s2 == null;
         if (s1.equals(s2)) return true;
         if (s1.length() > s2.length()) return false;
