@@ -1,5 +1,6 @@
 package com.example.leet.may.week3;
 
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -71,7 +72,7 @@ public class Day19 {
         private int[] spansStack;
         private int top;
 
-        public StockSpanner() {
+        public StockSpanner1() {
             pricesStack = new int[10000];
             spansStack = new int[10000];
             top = -1;
@@ -88,5 +89,23 @@ public class Day19 {
             return span;
         }
 
+    }
+
+    static class StockSpanner2 {
+
+        public StockSpanner2() {
+            i=0;
+            st=new LinkedList<>();
+        }
+        static LinkedList<int[]> st;
+        static int i;
+        public int next(int x) {
+            while(!st.isEmpty() && st.getLast()[1] <= x) {
+                st.removeLast();
+            }
+            int ai = st.isEmpty()?-1:st.getLast()[0];
+            st.addLast(new int[]{i,x});
+            return i++ -ai;
+        }
     }
 }
