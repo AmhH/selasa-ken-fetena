@@ -43,4 +43,61 @@ package com.example.leet.may.week3;
  * The optimal runtime complexity is O(height of BST).
  */
 public class Day20 {
+
+    int count, ans;
+    public int kthSmallest(TreeNode root, int k) {
+        count = k;
+        inOrderTraverse(root);
+
+        return ans;
+    }
+
+    private void inOrderTraverse(TreeNode root) {
+        if(root == null)
+            return;
+        inOrderTraverse(root.left);
+        count--;
+        if(count == 0) {
+            ans = root.val;
+            return;
+        }
+
+        inOrderTraverse(root.right);
+    }
+
+
+    public static void main(String[] args) {
+        TreeNode t1 = new TreeNode(1);
+        TreeNode t2 = new TreeNode(2);
+        TreeNode t3 = new TreeNode(3);
+        TreeNode t4 = new TreeNode(4);
+        TreeNode t5 = new TreeNode(5);
+        TreeNode t6 = new TreeNode(6);
+
+        t5.left = t3;
+        t5.right = t6;
+        t3.left = t2;
+        t3.right = t4;
+        t2.left = t1;
+
+        System.out.println(new Day20().kthSmallest(t3, 3));
+
+    }
+
+    /**
+     * Definition for a binary tree node.
+      */
+    static public class TreeNode {
+      int val;
+      TreeNode left;
+      TreeNode right;
+      TreeNode() {}
+      TreeNode(int val) { this.val = val; }
+      TreeNode(int val, TreeNode left, TreeNode right) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+      }
+  }
+
 }
