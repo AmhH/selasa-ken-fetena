@@ -69,9 +69,13 @@ public class Day27 {
         System.out.println(possibleBipartition(4, new int[][]{{1,2},{1,3},{2,4}}));
         System.out.println(possibleBipartition(3, new int[][]{{1,2},{1,3},{2,3}}));
         System.out.println(possibleBipartition(5, new int[][]{{1,2},{2,3},{3,4},{4,5},{1,5}}));
+
+        System.out.println(possibleBipartition1(4, new int[][]{{1,2},{1,3},{2,4}}));
+        System.out.println(possibleBipartition1(3, new int[][]{{1,2},{1,3},{2,3}}));
+        System.out.println(possibleBipartition1(5, new int[][]{{1,2},{2,3},{3,4},{4,5},{1,5}}));
     }
 
-    public boolean possibleBipartition1(int N, int[][] dislikes) {
+    public static boolean possibleBipartition1(int N, int[][] dislikes) {
         int[] ids = new int[N+1];
         for(int i=0; i < ids.length; i++) {
             ids[i] = i;
