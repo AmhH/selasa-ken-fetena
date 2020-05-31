@@ -37,7 +37,7 @@ public class Day28 {
             ans[i] = ans[i & (i - 1)] + 1;
         return ans;
     }
-Thread
+
     public static void main(String[] args) {
         System.out.println(Arrays.toString(countBits(2)));
         System.out.println(Arrays.toString(countBits(5)));
