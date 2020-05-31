@@ -56,4 +56,93 @@ public class Day30 {
         System.out.println(Arrays.deepToString(kClosest(new int[][] {{1,3},{-2,2}}, 1)));
         System.out.println(Arrays.deepToString(kClosest(new int[][] {{3,3},{5,-1},{-2,4}}, 2)));
     }
+
+    public int[][] kClosest2(int[][] points, int K) {
+
+        int len = points.length;
+        int left = 0;
+        int right = len - 1;
+
+        while(left <= right){
+            int partitionIndex = partition(points,left,right);
+            if(partitionIndex == K){
+                break;
+            }
+            if(partitionIndex < K){
+                left = partitionIndex + 1;
+            }else{
+                right = partitionIndex - 1;
+            }
+        }
+
+        return Arrays.copyOfRange(points,0,K);
+    }
+
+    public int partition(int[][] points,int left,int right){
+        int[] pivot = points[left];
+
+        while(left < right){
+            while(left < right && compare(points[right],pivot) <= 0) right--;
+            points[left] = points[right];
+            while(left < right && compare(points[left],pivot) >= 0) left++;
+            points[right] = points[left];
+        }
+        points[left] = pivot;
+
+        return left;
+    }
+
+    public int compare(int[] point1,int[] point2){
+        return (point2[1] * point2[1] + point2[0] * point2[0]) - point1[1] * point1[1] - point1[0] * point1[0];
+    }
+
+    public int[][] kClosest3(int[][] points, int K) {
+
+        quickSelect(points,0,points.length-1,K);
+        return Arrays.copyOfRange(points,0,K);
+    }
+
+    public void quickSelect(int[][] points ,int start, int end ,int k) {
+
+        if(start<end){
+            int pivot = partition3(points,start,end);
+
+            if(pivot == k)
+                return;
+            if(pivot< k)
+                quickSelect(points, pivot+1,end,k);
+            else
+                quickSelect(points, start, pivot-1,k);
+        }
+
+    }
+
+    public int partition3(int[][] points ,int start, int end) {
+        int[] pivot = points[end];
+        int pIndex = start;
+
+        while(start<end){
+            if(distance(points[start]) <= distance(pivot)){
+                swap(points,start,pIndex);
+                pIndex++;
+            }
+            start++;
+        }
+        swap(points ,pIndex,end);
+        return pIndex;
+    }
+
+
+
+    public void swap(int[][] points, int index1,int index2){
+        int[] temp = points[index1];
+        points[index1] = points[index2];
+        points[index2] = temp;
+
+    }
+
+
+    public int distance(int[] point){
+        return point[0]*point[0] + point[1]*point[1];
+    }
 }
