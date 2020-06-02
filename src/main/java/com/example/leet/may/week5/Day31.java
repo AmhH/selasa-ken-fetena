@@ -1,5 +1,7 @@
 package com.example.leet.may.week5;
 
+import java.util.Map;
+
 /**
  * Edit Distance
  * Given two words word1 and word2, find the minimum number of operations required to convert word1 to word2.
@@ -59,5 +61,59 @@ public class Day31 {
     public static void main(String[] args) {
         System.out.println(minDistance("horse", "ros"));
         System.out.println(minDistance("intention", "execution"));
+    }
+
+    public int minDistance2(String word1, String word2) {
+        int n = word1.length();
+        int m = word2.length();
+        if (n == 0 || m == 0) {
+            return Math.max(n, m);
+        }
+        int[] dp = new int[n+1];
+        for (int i = 0; i <= n; i++) {
+            dp[i] = n - i;
+        }
+        for (int i = m - 1; i >= 0; i--) {
+            int rightMost = m - i;
+            for (int j = n - 1; j >= 0; j--) {
+                int ops = 0;
+                if (word1.charAt(j) != word2.charAt(i)) {
+                    ops = Math.min(rightMost, dp[j+1]);
+                    ops = Math.min(ops, dp[j]);
+                    ops += 1;
+                } else {
+                    ops = dp[j+1];
+                }
+                dp[j+1] = rightMost;
+                rightMost = ops;
+            }
+            dp[0] = rightMost;
+        }
+        return dp[0];
+    }
+
+    /**
+     * 2ms
+     */
+    class Solution{
+        char[] w1, w2;
+        int[][] memo;
+        public int minDistance(String word1, String word2){
+            w1 = word1.toCharArray();
+            w2 = word2.toCharArray();
+            memo = new int[w1.length][w2.length];
+
+            return f(w1.length -1, w2.length -1);
+        }
+
+        private int f(int i, int j) {
+            if(i < 0) return j + 1;
+            if(j < 0) return i + 1;
+            if(memo[i][j] > 0)
+                return memo[i][j];
+            if(w1[i] == w2[j])
+                return memo[i][j] = f(i - 1, j - 1);
+            return memo[i][j] = 1 + Math.min(Math.min(f(i - 1, j), f(i, j - 1)), f(i -1, j - 1));
+        }
     }
 }
