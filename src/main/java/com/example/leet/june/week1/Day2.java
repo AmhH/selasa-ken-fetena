@@ -37,10 +37,36 @@ public class Day2 {
       }
 
     public static void deleteNode(ListNode node) {
-
+        node.val = node.next.val;
+        node.next = node.next.next;
     }
 
     public static void main(String[] args) {
-        ListNode node = new ListNode(1);
+          //head = [4,5,1,9], node = 5
+        //head = [4,5,1,9], node = 1
+        ListNode n4 = new ListNode(4);
+        ListNode n5 = new ListNode(5);
+        ListNode n1 = new ListNode(1);
+        ListNode n9 = new ListNode(9);
+
+        n4.next = n5;
+        n5.next = n1;
+        n1.next = n9;
+
+        ListNode head1 = n4;
+        while(head1 != null){
+            System.out.print(head1.val + ", ");
+            head1 = head1.next;
+        }
+        System.out.println();
+        System.out.println("***************");
+        deleteNode(n5);
+
+        ListNode head = n4;
+        while(head != null){
+            System.out.print(head.val + ", ");
+            head = head.next;
+        }
+
     }
 }
