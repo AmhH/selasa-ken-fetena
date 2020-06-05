@@ -26,6 +26,24 @@ import java.util.Arrays;
  */
 public class Day4 {
 
+    public static void reverseString(char[] s) {
+        int length = s.length;
+        System.out.println(length);
+        for (int i = 0; i < length / 2; i++) {
+            char temp = s[length - i - 1];
+            s[length - i - 1] = s[i];
+            s[i] = temp;
+        }
+    }
+
+    public static void reverseString2(char[] s) {
+        int left=0,right=s.length-1;
+        while(left<right) {
+            char tmp=s[left];
+            s[left++]=s[right];
+            s[right--]=tmp;
+        }
+    }
 
     public static void main(String[] args) {
         char[] chars = {'h','e','l','l','o'};
