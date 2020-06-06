@@ -1,5 +1,8 @@
 package com.example.leet.june.week1;
 
+import java.util.Arrays;
+import java.util.Random;
+
 /**
  * Random Pick with Weight
  * Given an array w of positive integers, where w[i] describes the weight of index i, write a function pickIndex which
@@ -28,7 +31,7 @@ package com.example.leet.june.week1;
  * array w. pickIndex has no arguments. Arguments are always wrapped with a list, even if there aren't any.
  */
 public class Day5 {
-    class Solution {
+    static class Solution {
         private int[] cumulative;
         private int sum;
 
@@ -68,6 +71,51 @@ public class Day5 {
      * int param_1 = obj.pickIndex();
      */
     public static void main(String[] args) {
+        Solution soln = new Solution(new int[]{1});
+        System.out.println(soln.pickIndex());
+        System.out.println("*******************");
 
+        Solution soln1 = new Solution(new int[]{1, 3});
+        System.out.println(soln1.pickIndex());
+        System.out.println(soln1.pickIndex());
+        System.out.println(soln1.pickIndex());
+        System.out.println(soln1.pickIndex());
+        System.out.println(soln1.pickIndex());
+        System.out.println("&&&&&&&&&&&&&&&&&&&&&");
+
+    }
+
+    static class Solution1 {
+        int[] w;
+        Random r;
+        public Solution1(int[] w) {
+            this.w = w;
+            r = new Random();
+            for (int i = 1; i < w.length; i++) {
+                w[i] += w[i - 1];
+            }
+        }
+
+        public int pickIndex() {
+            int lastSum = w[w.length - 1];
+            int target = r.nextInt(lastSum) + 1;
+            int p = Arrays.binarySearch(w, target);
+            return p >= 0 ? p : -p - 1;
+        }
+
+        public static void main(String[] args) {
+            Solution1 soln12 = new Solution1(new int[]{1});
+            System.out.println(soln12.pickIndex());
+            System.out.println("*******************");
+
+            Solution1 soln13 = new Solution1(new int[]{1, 3});
+            System.out.println(soln13.pickIndex());
+            System.out.println(soln13.pickIndex());
+            System.out.println(soln13.pickIndex());
+            System.out.println(soln13.pickIndex());
+            System.out.println(soln13.pickIndex());
+            System.out.println("&&&&&&&&&&&&&&&&&&&&&");
+
+        }
     }
 }
