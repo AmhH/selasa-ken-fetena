@@ -29,13 +29,36 @@ package com.example.leet.june.week1;
  */
 public class Day5 {
     class Solution {
+        private int[] cumulative;
+        private int sum;
 
         public Solution(int[] w) {
+            sum = 0;
+            cumulative = new int[w.length];
+            for (int i = 0; i < w.length; i++) {
+                sum += w[i];
+                cumulative[i] = sum;
+            }
 
         }
 
         public int pickIndex() {
+            int idx = (int) (Math.random() * sum);
+            return binarySearch(idx + 1);
+        }
 
+        private int binarySearch(int i) {
+            int left = 0;
+            int right = cumulative.length - 1;
+            while(left < right){
+                int mid = left + (right-left)/2;
+                if(cumulative[mid] < i){
+                    left = mid + 1;
+                }else{
+                    right = mid;
+                }
+            }
+            return left;
         }
     }
 
