@@ -1,8 +1,6 @@
 package com.example.leet.june.week1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Queue Reconstruction by Height
@@ -49,5 +47,67 @@ public class Day6 {
 
     public static void main(String[] args) {
         System.out.println(Arrays.deepToString(reconstructQueue(new int[][]{{7,0}, {4,4}, {7,1}, {5,0}, {6,1}, {5,2}})));
+        System.out.println(Arrays.deepToString(new Day6().reconstructQueue2(new int[][]{{7,0}, {4,4}, {7,1}, {5,0}, {6,1}, {5,2}})));
+        System.out.println(Arrays.deepToString(new Day6().reconstructQueue3(new int[][]{{7,0}, {4,4}, {7,1}, {5,0}, {6,1}, {5,2}})));
+    }
+
+    public class Node implements Comparable<Node> {
+        int ht;
+        int id;
+        Node(int h,int i) {
+            ht=h;
+            id=i;
+        }
+        public int compareTo(Node n) {
+            if(n.ht!=this.ht) {
+                return n.ht-this.ht;
+            }
+            return this.id-n.id;
+        }
+    }
+    public int[][] reconstructQueue2(int[][] people) {
+        PriorityQueue<Node> pq=new PriorityQueue();
+        for(int i=0;i<people.length;i++) {
+            pq.add(new Node(people[i][0],people[i][1]));
+        }
+        ArrayList<Node> rv=new ArrayList();
+        while(pq.size()!=0) {
+            Node n=pq.remove();
+            int id=n.id;
+            if(id>rv.size()) {
+                rv.add(n);
+            }
+            else {
+                rv.add(id,n);
+            }
+
+        }
+        int r[][]=new int[people.length][2];
+        for(int i=0;i<people.length;i++) {
+            Node n=rv.get(i);
+            r[i][0]=n.ht;
+            r[i][1]=n.id;
+        }
+        return r;
+    }
+
+    public int[][] reconstructQueue3(int[][] people) {
+        if (people == null || people.length == 0) {
+            return new int[0][0];
+        }
+        // in order of height -> pos
+        Queue<int[]> heap = new PriorityQueue<>(people.length, (a, b) -> {
+            int result = Integer.compare(b[0], a[0]);
+            return result == 0 ? Integer.compare(a[1], b[1]) : result;
+        });
+        for (int[] person : people) {
+            heap.offer(person);
+        }
+        List<int[]> result = new ArrayList<>();
+        while (!heap.isEmpty()) {
+            int[] curr = heap.poll();
+            result.add(curr[1], curr);
+        }
+        return result.toArray(new int[people.length][2]);
     }
 }
