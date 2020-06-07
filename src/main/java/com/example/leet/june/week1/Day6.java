@@ -1,5 +1,9 @@
 package com.example.leet.june.week1;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Queue Reconstruction by Height
  * Suppose you have a random list of people standing in a queue. Each person is described by a pair of integers (h, k),
@@ -26,7 +30,24 @@ package com.example.leet.june.week1;
  */
 public class Day6 {
 
-    public int[][] reconstructQueue(int[][] people) {
+    /**
+     * Arrays.sort(people, Comparator.comparing((int[] e) -> e[0])
+     *                     .reversed().thenComparing((int[] e) -> e[1]));
+     * @param people
+     * @return
+     */
+    public static int[][] reconstructQueue(int[][] people) {
 
+        Arrays.sort(people, (a, b) -> a[0] == b[0] ? a[1] - b[1] : b[0] - a[0]);
+        List<int[]> res = new ArrayList<>();
+        for(int[] p : people){
+            res.add(p[1], p);
+        }
+        int n = people.length;
+        return res.toArray(new int[n][2]);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Arrays.deepToString(reconstructQueue(new int[][]{{7,0}, {4,4}, {7,1}, {5,0}, {6,1}, {5,2}})));
     }
 }
