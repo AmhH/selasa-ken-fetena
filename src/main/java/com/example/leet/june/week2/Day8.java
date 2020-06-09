@@ -21,5 +21,38 @@ package com.example.leet.june.week2;
  */
 public class Day8 {
 
+    public static boolean isPowerOfTwo(int n) {
+        if(n == 0){
+            return false;
+        }
+        if(n == 1){
+            return true;
+        }
 
+        int div = n;
+        while(div % 2 == 0){
+            div /= 2;
+            if(div == 1)
+                return true;
+        }
+
+        return false;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(isPowerOfTwo(2));
+        System.out.println(isPowerOfTwo(16));
+        System.out.println(isPowerOfTwo(218));
+
+        System.out.println(isPowerOfTwo2(2));
+        System.out.println(isPowerOfTwo2(16));
+        System.out.println(isPowerOfTwo2(218));
+    }
+
+    public static boolean isPowerOfTwo2(int n) {
+        if(n<=0)
+            return false;
+        return (n&(-n)) == n;
+
+    }
 }
