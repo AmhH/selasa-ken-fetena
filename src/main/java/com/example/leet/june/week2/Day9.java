@@ -34,4 +34,34 @@ package com.example.leet.june.week2;
  * Both strings consists only of lowercase characters.
  */
 public class Day9 {
+    public static boolean isSubsequence(String s, String t) {
+        if(s.isEmpty())
+            return false;
+        int index = 0;
+        for (int i = 0; i < t.length(); i++) {
+            if(t.charAt(i) == s.charAt(index)){
+                index++;
+            }
+            if(index >= s.length()){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(isSubsequence("abc", "ahbgdc"));
+        System.out.println(isSubsequence2("axc", "ahbgdc"));
+    }
+
+    public static boolean isSubsequence2(String s, String t) {
+        int index = -1;
+        for (char c : s.toCharArray()){
+            index = t.indexOf(c, index + 1);
+            if (index == -1)
+                return false;
+        }
+        return true;
+    }
 }
