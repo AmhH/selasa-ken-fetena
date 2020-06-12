@@ -1,5 +1,7 @@
 package com.example.leet.june.week2;
 
+import java.util.Arrays;
+
 /**
  *  Sort Colors
  * Given an array with n objects colored red, white or blue, sort them in-place so that objects of the same color are
@@ -22,7 +24,61 @@ package com.example.leet.june.week2;
  */
 public class Day12 {
 
-    public void sortColors(int[] nums) {
+    public static void sortColors(int[] nums) {
+        if(nums.length <= 1)
+            return;
+        int index = 0;
+        int start = 0;
+        int end = nums.length - 1;
 
+        while(index <= end && start <= end){
+            if(nums[index] == 0){
+                nums[index] = nums[start];
+                nums[start] = 0;
+                index++;
+                start++;
+            }else if(nums[index] == 2){
+                nums[index] = nums[end];
+                nums[end] = 2;
+                end--;
+            }else{
+                index++;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {2,0,2,1,1,0};
+        int[] nums1 = {2,0,1};
+        sortColors(nums);
+        sortColors2(nums1);
+        System.out.println(Arrays.toString(nums));
+        System.out.println(Arrays.toString(nums1));
+    }
+
+    public static void sortColors2(int[] nums) {
+        int i = 0;
+        int left = -1;
+        int right = nums.length ;
+        while(i < right) {
+
+            if(nums[i] == 0) {
+                left++;
+                swap(nums, i, left);
+                i++;
+            }
+            else if(nums[i] == 2) {
+                right--;
+                swap(nums, i, right);
+            }
+            else
+                i++;
+
+        }
+    }
+    public static void swap(int[ ] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
