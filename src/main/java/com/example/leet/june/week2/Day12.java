@@ -1,84 +1,68 @@
 package com.example.leet.june.week2;
 
-import java.util.Arrays;
-
 /**
- *  Sort Colors
- * Given an array with n objects colored red, white or blue, sort them in-place so that objects of the same color are
- * adjacent, with the colors in the order red, white and blue.
+ * Insert Delete GetRandom O(1)
+ * Design a data structure that supports all following operations in average O(1) time.
  *
- * Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
- *
- * Note: You are not suppose to use the library's sort function for this problem.
- *
+ * insert(val): Inserts an item val to the set if not already present.
+ * remove(val): Removes an item val from the set if present.
+ * getRandom: Returns a random element from current set of elements. Each element must have the same probability of
+ * being returned.
  * Example:
  *
- * Input: [2,0,2,1,1,0]
- * Output: [0,0,1,1,2,2]
- * Follow up:
+ * // Init an empty set.
+ * RandomizedSet randomSet = new RandomizedSet();
  *
- * A rather straight forward solution is a two-pass algorithm using counting sort.
- * First, iterate the array counting number of 0's, 1's, and 2's, then overwrite array with total number of 0's, then
- * 1's and followed by 2's.
- * Could you come up with a one-pass algorithm using only constant space?
+ * // Inserts 1 to the set. Returns true as 1 was inserted successfully.
+ * randomSet.insert(1);
+ *
+ * // Returns false as 2 does not exist in the set.
+ * randomSet.remove(2);
+ *
+ * // Inserts 2 to the set, returns true. Set now contains [1,2].
+ * randomSet.insert(2);
+ *
+ * // getRandom should return either 1 or 2 randomly.
+ * randomSet.getRandom();
+ *
+ * // Removes 1 from the set, returns true. Set now contains [2].
+ * randomSet.remove(1);
+ *
+ * // 2 was already in the set, so return false.
+ * randomSet.insert(2);
+ *
+ * // Since 2 is the only number in the set, getRandom always return 2.
+ * randomSet.getRandom();
  */
 public class Day12 {
+    class RandomizedSet {
 
-    public static void sortColors(int[] nums) {
-        if(nums.length <= 1)
-            return;
-        int index = 0;
-        int start = 0;
-        int end = nums.length - 1;
+        /** Initialize your data structure here. */
+        public RandomizedSet() {
 
-        while(index <= end && start <= end){
-            if(nums[index] == 0){
-                nums[index] = nums[start];
-                nums[start] = 0;
-                index++;
-                start++;
-            }else if(nums[index] == 2){
-                nums[index] = nums[end];
-                nums[end] = 2;
-                end--;
-            }else{
-                index++;
-            }
+        }
+
+        /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
+        public boolean insert(int val) {
+
+        }
+
+        /** Removes a value from the set. Returns true if the set contained the specified element. */
+        public boolean remove(int val) {
+
+        }
+
+        /** Get a random element from the set. */
+        public int getRandom() {
+
         }
     }
 
-    public static void main(String[] args) {
-        int[] nums = {2,0,2,1,1,0};
-        int[] nums1 = {2,0,1};
-        sortColors(nums);
-        sortColors2(nums1);
-        System.out.println(Arrays.toString(nums));
-        System.out.println(Arrays.toString(nums1));
-    }
-
-    public static void sortColors2(int[] nums) {
-        int i = 0;
-        int left = -1;
-        int right = nums.length ;
-        while(i < right) {
-
-            if(nums[i] == 0) {
-                left++;
-                swap(nums, i, left);
-                i++;
-            }
-            else if(nums[i] == 2) {
-                right--;
-                swap(nums, i, right);
-            }
-            else
-                i++;
-
-        }
-    }
-    public static void swap(int[ ] nums, int i, int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
-    }
+/**
+ * Your RandomizedSet object will be instantiated and called as such:
+ * RandomizedSet obj = new RandomizedSet();
+ * boolean param_1 = obj.insert(val);
+ * boolean param_2 = obj.remove(val);
+ * int param_3 = obj.getRandom();
+ */
 }
