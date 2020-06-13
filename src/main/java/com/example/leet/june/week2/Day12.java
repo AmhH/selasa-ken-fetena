@@ -1,5 +1,7 @@
 package com.example.leet.june.week2;
 
+import java.util.*;
+
 /**
  * Insert Delete GetRandom O(1)
  * Design a data structure that supports all following operations in average O(1) time.
@@ -37,24 +39,44 @@ package com.example.leet.june.week2;
 public class Day12 {
     class RandomizedSet {
 
+        private List<Integer> list;
+        private Map<Integer, Integer> map;
+        private Random random;
         /** Initialize your data structure here. */
         public RandomizedSet() {
+            this.list = new ArrayList<>();
+            this.map = new HashMap<>();
+            this.random = new Random();
 
         }
 
         /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
         public boolean insert(int val) {
-
+            if(!map.containsKey(val)){
+                list.add(val);
+                map.put(val, list.size() - 1);
+                return true;
+            }
+            return false;
         }
 
         /** Removes a value from the set. Returns true if the set contained the specified element. */
         public boolean remove(int val) {
-
+            if(!map.containsKey(val)){
+                return false;
+            }
+            int index = map.get(val);
+            int last = list.get(list.size() - 1);
+            list.set(index, last);
+            map.put(last, index);
+            list.remove(list.size()-1);
+            map.remove(val);
+            return true;
         }
 
         /** Get a random element from the set. */
         public int getRandom() {
-
+            return list.get(random.nextInt(list.size()));
         }
     }
 
