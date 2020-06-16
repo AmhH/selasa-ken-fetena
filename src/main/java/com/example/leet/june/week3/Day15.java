@@ -28,7 +28,33 @@ package com.example.leet.june.week3;
  */
 public class Day15 {
 
+    public static TreeNode searchBST(TreeNode root, int val) {
+        if(root==null)
+            return null;
+        if(root.val==val)
+            return root;
 
+        TreeNode leftNode = searchBST(root.left,val);
+        TreeNode rightNode = searchBST(root.right,val);
+
+        if(leftNode != null)
+            return leftNode;
+        if(rightNode != null)
+            return rightNode;
+
+        return null;
+    }
+
+    public TreeNode searchBST2(TreeNode root, int val) {
+        if (root == null) return null;
+        if (root.val == val) {
+            return root;
+        } else if (root.val > val) {
+            return searchBST2(root.left, val);
+        } else {
+            return searchBST2(root.right, val);
+        }
+    }
 
     /**
      * Definition for a binary tree node.
