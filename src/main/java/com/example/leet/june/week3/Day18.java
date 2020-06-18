@@ -33,5 +33,22 @@ import java.util.stream.Collectors;
  */
 public class Day18 {
 
+    public static int hIndex(int[] citations) {
+        int size = citations.length;
+        int left = 0, right = size - 1;
+        while(left <= right){
+            int mid = (right - left)/2 + left;
+            if(citations[mid] < size -mid){
+                left = mid + 1;
+            }else {
+                right = mid - 1;
+            }
+        }
 
+        return size - left;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(hIndex(new int[]{0,1,3,5,6}));
+    }
 }
