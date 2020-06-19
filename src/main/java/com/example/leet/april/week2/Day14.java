@@ -49,7 +49,7 @@ public class Day14 {
      * @param shift
      * @return
      */
-    public String stringShift(String s, int[][] shift) {
+    public static String stringShift(String s, int[][] shift) {
         int sum = 0;
         for (int[] array : shift){
             if(array[0] == 0){
@@ -77,5 +77,10 @@ public class Day14 {
         }
 
         return s;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(stringShift("abc", new int[][]{{0,1},{1,2}}));
+        System.out.println(stringShift("abcdefg", new int[][]{{1,1},{1,1},{0,2},{1,3}}));
     }
 }
