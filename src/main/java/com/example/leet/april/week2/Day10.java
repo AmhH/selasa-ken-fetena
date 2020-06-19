@@ -36,34 +36,38 @@ public class Day10 {
         System.out.println(minStack.top());      // Returns 0.
         System.out.println(minStack.getMin());   // Returns -2.
     }
-}
 
-class MinStack {
 
-    Stack<int[]> stack;
-    /** initialize your data structure here. */
-    public MinStack() {
-        stack = new Stack<>();
-    }
+    static class MinStack {
 
-    public void push(int x) {
-        if(stack.isEmpty()){
-            stack.push(new int[] {x, x});
-        }else{
-            stack.push(new int[] {x, Math.min(stack.peek()[1], x)});
+        Stack<int[]> stack;
+
+        /**
+         * initialize your data structure here.
+         */
+        public MinStack() {
+            stack = new Stack<>();
         }
 
-    }
+        public void push(int x) {
+            if (stack.isEmpty()) {
+                stack.push(new int[]{x, x});
+            } else {
+                stack.push(new int[]{x, Math.min(stack.peek()[1], x)});
+            }
 
-    public void pop() {
-        stack.pop();
-    }
+        }
 
-    public int top() {
-        return stack.peek()[0];
-    }
+        public void pop() {
+            stack.pop();
+        }
 
-    public int getMin() {
-        return stack.peek()[1];
+        public int top() {
+            return stack.peek()[0];
+        }
+
+        public int getMin() {
+            return stack.peek()[1];
+        }
     }
 }

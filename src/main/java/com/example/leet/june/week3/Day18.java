@@ -1,9 +1,5 @@
 package com.example.leet.june.week3;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
  * H-Index II
  * Given an array of citations sorted in ascending order (each citation is a non-negative integer) of a researcher,
