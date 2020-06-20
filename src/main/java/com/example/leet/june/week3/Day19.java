@@ -28,6 +28,8 @@ import java.util.HashSet;
  * 9, 8, 7, ...)
  *    Hide Hint #2
  * To check whether an answer of length K exists, we can use Rabin-Karp 's algorithm.
+ * https://leetcode.com/problems/longest-duplicate-substring/discuss/694963/Beats-100-using-Trie-tree
+ * https://www.youtube.com/watch?v=BMvotl5vHvM&feature=youtu.be
  */
 public class Day19 {
     private String S;
