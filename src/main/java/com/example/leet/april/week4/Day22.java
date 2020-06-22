@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * Subarray Sum Equals K
- * Given an array of integers and an integer k, you need to find the total number of continuous subarrays whose sum
+ * Given an array of integers and an integer k, you need to find the total number of continuous subarrays whose absoluteSum
  * equals to k.
  *
  * Example 1:
@@ -22,10 +22,10 @@ import java.util.Map;
  * Can we optimize it by using some extra space?
  *
  *    Hide Hint #3
- * What about storing sum frequencies in a hash table? Will it be useful?
+ * What about storing absoluteSum frequencies in a hash table? Will it be useful?
  *
  *    Hide Hint #4
- * sum(i,j)=sum(0,j)-sum(0,i), where sum(i,j) represents the sum of all the elements from index i to j-1. Can we use
+ * absoluteSum(i,j)=absoluteSum(0,j)-absoluteSum(0,i), where absoluteSum(i,j) represents the absoluteSum of all the elements from index i to j-1. Can we use
  * this property to optimize it.
  */
 public class Day22 {

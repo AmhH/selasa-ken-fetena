@@ -38,9 +38,9 @@ package com.example.leet.may.week3;
  * 1 <= arr[0].length <= 300
  * 0 <= arr[i][j] <= 1
  *    Hide Hint #1
- * Create an additive table that counts the sum of elements of submatrix with the superior corner at (0,0).
+ * Create an additive table that counts the absoluteSum of elements of submatrix with the superior corner at (0,0).
  *    Hide Hint #2
- * Loop over all subsquares in O(n^3) and check if the sum make the whole array to be ones, if it checks then add 1
+ * Loop over all subsquares in O(n^3) and check if the absoluteSum make the whole array to be ones, if it checks then add 1
  * to the answer.
  */
 public class Day21 {
@@ -115,7 +115,7 @@ public class Day21 {
     }
 
     public int countSquares3(int[][] matrix) {
-        //use cumulative sum array
+        //use cumulative absoluteSum array
         int m = matrix.length;
         int n = matrix[0].length;
         int count = matrix[0][0];

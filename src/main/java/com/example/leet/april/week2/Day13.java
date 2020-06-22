@@ -43,10 +43,10 @@ public class Day13 {
     }
 
     /**
-     * Classic solution using HashMap. For every 1 we sum 1, for every 0 we sum -1. We keep every different sum we have
-     * seen in a HashMap. If we ever see the current sum in the HashMap, it means that there were equal number of zeros
-     * and ones in between the current index i and the index in the HashMap, because only the sum of the same number of
-     * 1's and -1's would make the sum equal again. So the difference between those two indexes is a candidate for a max.
+     * Classic solution using HashMap. For every 1 we absoluteSum 1, for every 0 we absoluteSum -1. We keep every different absoluteSum we have
+     * seen in a HashMap. If we ever see the current absoluteSum in the HashMap, it means that there were equal number of zeros
+     * and ones in between the current index i and the index in the HashMap, because only the absoluteSum of the same number of
+     * 1's and -1's would make the absoluteSum equal again. So the difference between those two indexes is a candidate for a max.
      */
     public int findMaxLength2(int[] nums) {
         int sum = 0;
