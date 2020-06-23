@@ -21,10 +21,20 @@ package com.example.leet.june.week4;
 public class Day22 {
 
     public static int singleNumber(int[] nums) {
+        int ones = 0, twos = 0, not_threes;
+        for(int n : nums) {
+            twos |= (ones & n);
+            ones ^= n;
+            not_threes = ~(ones & twos);
+            ones &= not_threes;
+            twos &= not_threes;
+        }
 
+        return ones;
     }
 
     public static void main(String[] args) {
-
+        System.out.println(singleNumber(new int[]{2,2,3,2}));
+        System.out.println(singleNumber(new int[]{0,1,0,1,0,1,99}));
     }
 }
