@@ -3,7 +3,7 @@ package com.example.leet.april.week3;
 import java.util.List;
 
 /**
- *Leftmost Column with at Least a One
+ * Leftmost Column with at Least a One
  * (This problem is an interactive problem.)
  *
  * A binary matrix means that all elements are 0 or 1. For each individual row of the matrix, this row is sorted in
