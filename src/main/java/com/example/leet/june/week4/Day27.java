@@ -15,15 +15,30 @@ package com.example.leet.june.week4;
  * Input: n = 13
  * Output: 2
  * Explanation: 13 = 4 + 9.
+ * https://www.youtube.com/watch?v=dOOzOsfj31I
  */
 public class Day27 {
 
     public static int numSquares(int n) {
-
+        int[] dp = new int[n+1];
+        for (int i = 1; i <= n; i++) {
+            int min = i;
+            int j = 1;
+            int square = 1;
+            while (square <= i){
+                min = Math.min(min, 1 + dp[i-square]);
+                j++;
+                square = j * j;
+            }
+            dp[i] = min;
+        }
+        return dp[n];
     }
 
     public static void main(String[] args) {
         System.out.println(numSquares(12));
         System.out.println(numSquares(13));
     }
+
+
 }
