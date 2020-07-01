@@ -110,5 +110,69 @@ public class Java30 {
             }, new String[]{"oath","pea","eat","rain"}));
     }
 
+    class Solution {
 
+        class TrieNode {
+            private TrieNode[] next = new TrieNode[26];
+            private String word;
+        }
+
+        public List<String> findWords(char[][] board, String[] words) {
+            TrieNode root = buildTrie(words);
+            List<String> result = new ArrayList<>();
+
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[0].length; j++) {
+                    dfs(board, root, result, i, j);
+                }
+            }
+            return result;
+        }
+
+        private void dfs(char[][] board, TrieNode node, List<String> result, int i, int j) {
+            if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) {
+                return;
+            }
+
+            char c = board[i][j];
+            int diff = c - 'a';
+
+
+            if (c == '*' || node.next[diff] == null) {
+                return;
+            }
+
+            node = node.next[diff];
+            if (node.word != null) {
+                result.add(node.word);
+                node.word = null;
+            }
+
+            board[i][j] = '*';
+            dfs(board, node, result, i+1, j);
+            dfs(board, node, result, i-1, j);
+            dfs(board, node, result, i, j-1);
+            dfs(board, node, result, i, j+1);
+            board[i][j] = c;
+        }
+
+
+        private TrieNode buildTrie(String[] words) {
+            TrieNode root = new TrieNode();
+
+            for (String word : words) {
+                TrieNode node = root;
+                for (int i = 0; i < word.length(); i++) {
+                    char c = word.charAt(i);
+                    int diff = c - 'a';
+                    if (node.next[diff] == null) {
+                        node.next[diff] = new TrieNode();
+                    }
+                    node = node.next[diff];
+                }
+                node.word = word;
+            }
+            return root;
+        }
+    }
 }
