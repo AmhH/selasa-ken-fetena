@@ -41,5 +41,74 @@ import java.util.Set;
  * Tree) first.
  */
 public class Java30 {
+    public static class Trie{
+        public Trie[] children;
+        public boolean endOfWord;
+
+        public Trie(){
+            endOfWord = false;
+            children = new Trie[26];
+        }
+
+        public void insert(String word){
+            Trie curr = this;
+            for (char c : word.toCharArray()){
+                if(curr.children[c - 'a'] == null)
+                    curr.children[c - 'a'] = new Trie();
+                curr = curr.children[c - 'a'];
+            }
+            curr.endOfWord = true;
+        }
+    }
+
+
+    public static List<String> findWords(char[][] board, String[] words) {
+
+        if(words.length == 0)
+            return new ArrayList<>();
+        Trie trie = new Trie();
+        for(String s : words)
+            trie.insert(s);
+        Set<String> result = new HashSet<>();
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                dfs(board, i, j, result, trie, "");
+            }
+        }
+
+        return new ArrayList<>(result);
+    }
+
+    private static void dfs(char[][] board, int i, int j, Set<String> result, Trie trie, String s){
+        char c = board[i][j];
+        if(c == '$')
+            return;
+        board[i][j] = '$';
+        Trie child = trie.children[c - 'a'];
+        if(child != null){
+            String str = s + c;
+            if(child.endOfWord)
+                result.add(str);
+            if(i < board.length - 1)
+                dfs(board, i+1, j, result, child, str);
+            if(j < board.length - 1)
+                dfs(board, i, j+1, result, child, str);
+            if(i > 0)
+                dfs(board, i-1, j, result, child, str);
+            if(j > 0)
+                dfs(board, i, j-1, result, child, str);
+        }
+        board[i][j] = c;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(findWords(new char[][]{
+                {'o','a','a','n'},
+                {'e','t','a','e'},
+                {'i','h','k','r'},
+                {'i','f','l','v'}
+            }, new String[]{"oath","pea","eat","rain"}));
+    }
+
 
 }
