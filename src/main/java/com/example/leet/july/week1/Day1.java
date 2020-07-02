@@ -35,4 +35,42 @@ package com.example.leet.july.week1;
  */
 public class Day1 {
 
+    public int arrangeCoins(int n) {
+        int count = 0;
+        int i = 1;
+        while(n >= i){
+            n -= i;
+            count++;
+            i++;
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Day1().arrangeCoins(5));
+        System.out.println(new Day1().new Solution().arrangeCoins(8));
+    }
+
+    class Solution {
+        public int arrangeCoins(int n) {
+            int left = 0;
+            int right = n;
+            long k;
+
+            long curr;
+            while (left <= right) {
+                k =(int)(left + (right - left) / 2);
+                curr = k * (k + 1) / 2;
+
+                if (curr == n) return (int)k;
+
+                if (n < curr) {
+                    right = (int)k - 1;
+                } else {
+                    left = (int)k + 1;
+                }
+            }
+            return right;
+        }
+    }
 }
