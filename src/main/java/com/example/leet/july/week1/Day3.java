@@ -49,5 +49,50 @@ import java.util.Arrays;
  */
 public class Day3 {
 
+    public int[] prisonAfterNDays(int[] cells, int N) {
+        N = (N - 1) % 14 + 1;
+        for (int i = 0; i < N; i++)
+            cells = nextDayState(cells);
+        return cells;
+    }
 
+    private int[] nextDayState(int[] cells) {
+        int[] next = new int[cells.length];
+        for(int i = 1; i < cells.length - 1; i++)
+            next[i] = cells[i - 1] == cells[i + 1] ? 1 : 0;
+        return next;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(new Day3().prisonAfterNDays(new int[]{0,1,0,1,1,0,0,1}, 7)));
+        System.out.println(Arrays.toString(new Day3().prisonAfterNDays(new int[]{1,0,0,1,0,0,1,0}, 1000000000)));
+    }
+
+    class Solution {
+        public int[] prisonAfterNDays(int[] cells, int N) {
+            int prevLeft=0;
+            N = N%14 == 0 ? 14 : N%14;
+            while(N > 0){
+                for(int i=0; i<cells.length-1; i++){
+                    if(i == 0){
+                        prevLeft = cells[i];
+                        cells[i] = 0;
+                    } else {
+                        if(prevLeft == cells[i+1]){
+                            prevLeft = cells[i];
+                            cells[i] = 1;
+                        } else {
+                            prevLeft = cells[i];
+                            cells[i] = 0;
+                        }
+                        if(i == cells.length-2){
+                            cells[cells.length-1] = 0;
+                        }
+                    }
+                }
+                N--;
+            }
+            return cells;
+        }
+    }
 }
