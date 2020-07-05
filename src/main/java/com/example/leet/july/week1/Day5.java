@@ -38,4 +38,21 @@ public class Day5 {
     public static void main(String[] args) {
         System.out.println(hammingDistance(1, 4));
     }
+
+    /**
+     * Better memory
+     */
+    class Solution {
+        public int hammingDistance(int x, int y) {
+            int combined = x ^ y;
+
+            int count = 0;
+            while(combined > 0) {
+                count += combined & 1;
+                combined >>= 1;
+            }
+
+            return count;
+        }
+    }
 }
