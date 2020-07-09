@@ -40,5 +40,45 @@ import java.util.List;
  * maybe a hash map to speed up the search?
  */
 public class Day8 {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> ret = new ArrayList<>();
+        Arrays.sort(nums); //asc order
 
+        for (int i=0; i < nums.length-2; i++)
+        {
+            if(nums[i] > 0 || (i > 0 && nums[i-1]==nums[i]))
+                continue;
+            int sum = 0 - nums[i];
+
+            int lo=i+1;
+            int hi = nums.length-1;
+            while (lo<hi)
+            {
+                if (nums[lo] + nums[hi] > sum)
+                {
+                    hi--;
+                }
+                else if (nums[lo] + nums[hi] < sum)
+                    lo++;
+                else
+                {
+                    List<Integer> entry = new ArrayList<>();
+                    entry.add(nums[i]);
+                    entry.add(nums[lo++]);
+                    entry.add(nums[hi--]);
+                    ret.add(entry);
+                    while (lo < nums.length && nums[lo] == nums[lo-1])
+                        lo++;
+                    while (hi >= 0 && nums[hi] == nums[hi+1])
+                        hi--;
+                }
+            }
+
+        }
+        return ret;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Day8().threeSum(new int[]{-1, 0, 1, 2, -1, -4}));
+    }
 }
