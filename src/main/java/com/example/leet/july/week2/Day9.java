@@ -1,5 +1,8 @@
 package com.example.leet.july.week2;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Maximum Width of Binary Tree
  * Given a binary tree, write a function to get the maximum width of the given tree. The width of a tree is the
@@ -64,9 +67,36 @@ package com.example.leet.july.week2;
  */
 public class Day9 {
     public int widthOfBinaryTree(TreeNode root) {
-        return 0;
+        if (root == null) return 0;
+
+        int maxWidth = 0;
+        Queue<Pair<TreeNode, Integer>> queue = new LinkedList<>();
+        queue.offer(new Pair(root, 0));
+        while (!queue.isEmpty()) {
+            Pair<TreeNode, Integer> first = queue.peek();
+            int size = queue.size();
+            Pair<TreeNode, Integer> curr = null;
+            while (size-- > 0) {
+                curr = queue.poll();
+                TreeNode node = curr.key;
+                int index = curr.value;
+                if (node.left != null) queue.offer(new Pair(node.left, 2 * index));
+                if (node.right != null) queue.offer(new Pair(node.right, 2 * index + 1));
+            }
+            maxWidth = Math.max(maxWidth, curr.value - first.value + 1);
+        }
+        return maxWidth;
     }
 
+    public class Pair<A, M>{
+        A key;
+        M value;
+
+        Pair(A key, M value){
+            this.key = key;
+            this.value = value;
+        }
+    }
     public static void main(String[] args) {
 
     }
