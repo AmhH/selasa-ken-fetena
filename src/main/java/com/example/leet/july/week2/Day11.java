@@ -27,6 +27,10 @@ import java.util.List;
  * https://leetcode.com/problems/subsets/solution/
  */
 public class Day11 {
+    final int x;
+    {
+        x = 10;
+    }
 
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> output = new ArrayList<>();
@@ -52,17 +56,18 @@ public class Day11 {
     class Solution {
         public List<List<Integer>> subsets(int[] nums) {
             List<List<Integer>> ans=new ArrayList<>();
-            gensubset(0,nums,new ArrayList<>(),ans);
+            genSubset(0,nums,new ArrayList<>(),ans);
             return ans;
         }
 
-        public void gensubset(int index, int[]nums, List<Integer> curr,List<List<Integer>> ans){
+        public void genSubset(int index, int[]nums, List<Integer> curr, List<List<Integer>> ans){
             ans.add(new ArrayList<>(curr));
             for(int i=index;i<nums.length;i++){
                 curr.add(nums[i]);
-                gensubset(i+1,nums,curr,ans);
+                genSubset(i+1,nums,curr,ans);
                 curr.remove(curr.size()-1);
             }
         }
     }
+
 }
