@@ -18,12 +18,12 @@ public class TreeNode {
     public static TreeNode createTreeFromArray(int[] array) {
         if (array.length > 0) {
             TreeNode root = new TreeNode(array[0]);
-            java.util.Queue<TreeNode> queue = new java.util.LinkedList<TreeNode>();
+            java.util.Queue<TreeNode> queue = new java.util.LinkedList<>();
             queue.add(root);
             boolean done = false;
             int i = 1;
             while (!done) {
-                TreeNode r = (TreeNode) queue.element();
+                TreeNode r = queue.element();
                 if (r.left == null) {
                     r.left = new TreeNode(array[i]);
                     i++;

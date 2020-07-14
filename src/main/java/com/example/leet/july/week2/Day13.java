@@ -38,7 +38,27 @@ import com.example.leet.util.TreeNode;
  */
 public class Day13 {
 
+    public static boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p == null && q == null){
+            return true;
+        }
+        if(p == null || q == null)
+            return false;
 
+        return p.val==q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(isSameTree(TreeNode.createTreeFromArray(new int[]{1,2,3}),
+                TreeNode.createTreeFromArray(new int[]{1,2,3})));
+
+        System.out.println(isSameTree(TreeNode.createTreeFromArray(new int[]{1,2}),
+                TreeNode.createTreeFromArray(new int[]{1,2,3})));
+
+        System.out.println(isSameTree(TreeNode.createTreeFromArray(new int[]{1,2,1}),
+                TreeNode.createTreeFromArray(new int[]{1,1,2})));
+    }
 
 
 
