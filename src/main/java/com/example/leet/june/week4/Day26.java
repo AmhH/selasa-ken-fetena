@@ -1,5 +1,7 @@
 package com.example.leet.june.week4;
 
+import com.example.leet.util.TreeNode;
+
 /**
  * Sum Root to Leaf Numbers
  * Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number.
@@ -51,22 +53,6 @@ public class Day26 {
 
         return sumNumbers(root.left, current) + sumNumbers(root.right, current);
     }
-
-    /**
-     * Definition for a binary tree node.
-     */
-      public static class TreeNode {
-          int val;
-          TreeNode left;
-          TreeNode right;
-          TreeNode() {}
-          TreeNode(int val) { this.val = val; }
-          TreeNode(int val, TreeNode left, TreeNode right) {
-              this.val = val;
-              this.left = left;
-              this.right = right;
-          }
-      }
 
     public static void main(String[] args) {
         TreeNode node = new TreeNode(9, new TreeNode(5), new TreeNode(1));

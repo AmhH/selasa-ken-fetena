@@ -1,5 +1,7 @@
 package com.example.leet.may.week3;
 
+import com.example.leet.util.TreeNode;
+
 /**
  * Kth Smallest Element in a BST
  * Given a binary search tree, write a function kthSmallest to find the kth smallest element in it.
@@ -83,21 +85,5 @@ public class Day20 {
         System.out.println(new Day20().kthSmallest(t3, 3));
 
     }
-
-    /**
-     * Definition for a binary tree node.
-      */
-    static public class TreeNode {
-      int val;
-      TreeNode left;
-      TreeNode right;
-      TreeNode() {}
-      TreeNode(int val) { this.val = val; }
-      TreeNode(int val, TreeNode left, TreeNode right) {
-          this.val = val;
-          this.left = left;
-          this.right = right;
-      }
-  }
 
 }

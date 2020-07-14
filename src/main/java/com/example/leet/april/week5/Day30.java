@@ -1,5 +1,7 @@
 package com.example.leet.april.week5;
 
+import com.example.leet.util.TreeNode;
+
 /**
  * Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree
  * Given a binary tree where each path going from the root to any leaf form a valid sequence, check if a given string
@@ -61,20 +63,5 @@ public class Day30 {
                 (root.right != null && isValid(root.right, arr, index+1));
 
     }
-
-    /**
-     * Definition for a binary tree node.
-     */ public class TreeNode {
-          int val;
-          TreeNode left;
-          TreeNode right;
-          TreeNode() {}
-          TreeNode(int val) { this.val = val; }
-          TreeNode(int val, TreeNode left, TreeNode right) {
-              this.val = val;
-              this.left = left;
-              this.right = right;
-          }
-      }
 
 }

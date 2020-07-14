@@ -1,5 +1,7 @@
 package com.example.leet.june.week3;
 
+import com.example.leet.util.TreeNode;
+
 /**
  * Search in a Binary Search Tree
  * Given the root node of a binary search tree (BST) and a value. You need to find the node in the BST that the
@@ -56,19 +58,4 @@ public class Day15 {
         }
     }
 
-    /**
-     * Definition for a binary tree node.
-     */
-      public class TreeNode {
-          int val;
-          TreeNode left;
-          TreeNode right;
-          TreeNode() {}
-          TreeNode(int val) { this.val = val; }
-          TreeNode(int val, TreeNode left, TreeNode right) {
-              this.val = val;
-              this.left = left;
-              this.right = right;
-          }
-      }
 }

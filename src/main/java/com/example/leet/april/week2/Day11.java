@@ -1,5 +1,7 @@
 package com.example.leet.april.week2;
 
+import com.example.leet.util.TreeNode;
+
 /**
  * Diameter of Binary Tree
  * Given a binary tree, you need to compute the length of the diameter of the tree. The diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.
@@ -32,16 +34,6 @@ public class Day11 {
         int diameter = left+right+2;
         maxDiameter = Math.max(maxDiameter,diameter);
         return depth;
-    }
-
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
     }
 
     int diameter = 0;

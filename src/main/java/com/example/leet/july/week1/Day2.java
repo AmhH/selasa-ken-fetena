@@ -1,5 +1,7 @@
 package com.example.leet.july.week1;
 
+import com.example.leet.util.TreeNode;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,22 +45,5 @@ public class Day2 {
         helper (root.left, depth + 1, ans);
         helper (root.right, depth + 1, ans);
     }
-
-
-    /**
-     * Definition for a binary tree node.
-     */
-      public class TreeNode {
-          int val;
-          TreeNode left;
-          TreeNode right;
-          TreeNode() {}
-          TreeNode(int val) { this.val = val; }
-          TreeNode(int val, TreeNode left, TreeNode right) {
-              this.val = val;
-              this.left = left;
-              this.right = right;
-          }
-      }
 
 }

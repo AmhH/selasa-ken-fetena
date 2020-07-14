@@ -1,5 +1,7 @@
 package com.example.leet.may.week1;
 
+import com.example.leet.util.TreeNode;
+
 /**
  * Cousins in Binary Tree
  * In a binary tree, the root node is at depth 0, and children of each depth k node are at depth k+1.
@@ -60,21 +62,6 @@ public class Day7 {
         }
     }
 
-    /**
-     * Definition for a binary tree node.
-     */
-    class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode() {}
-        TreeNode(int val) { this.val = val; }
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
 }
 
 

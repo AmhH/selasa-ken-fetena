@@ -1,5 +1,7 @@
 package com.example.leet.may.week4;
 
+import com.example.leet.util.TreeNode;
+
 /**
  * Construct Binary Search Tree from Preorder Traversal
  * Return the root node of a binary search tree that matches the given preorder traversal.
@@ -20,15 +22,6 @@ package com.example.leet.may.week4;
  * The values of preorder are distinct.
  */
 public class Day24 {
-    /**
-     * Definition for a binary tree node.
-     */
-      public class TreeNode {
-          int val;
-          TreeNode left;
-          TreeNode right;
-          TreeNode(int x) { val = x; }
-      }
 
 
         public TreeNode bstFromPreorder(int[] preorder) {
