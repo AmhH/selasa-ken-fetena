@@ -1,5 +1,8 @@
 package com.example.leet.july.week3;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 /**
  * Reverse Words in a String
  * Given an input string, reverse the string word by word.
@@ -35,4 +38,40 @@ package com.example.leet.july.week3;
  * For C programmers, try to solve it in-place in O(1) extra space.
  */
 public class Day15 {
+
+    public static String reverseWords(String s) {
+         return Arrays.stream(s.split(" "))
+                    .filter(str -> !str.trim().isEmpty())
+                    .map(StringBuilder::new)
+                    .reduce(new StringBuilder(), (a,b) -> b.append(" ").append(a)).toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(reverseWords("the sky is blue"));
+        System.out.println(reverseWords("  hello world!  "));
+        System.out.println(reverseWords("a good   example"));
+        System.out.println("*******************");
+        System.out.println(reverseWords1("the sky is blue"));
+        System.out.println(reverseWords1("  hello world!  "));
+        System.out.println(reverseWords1("a good   example"));
+    }
+
+
+    public static String reverseWords1(String s) {
+        if (s == null) {
+            return s;
+        }
+
+        StringBuilder ans = new StringBuilder();
+
+        for (int i=s.length()-1, j; i>=0; i--) {
+            if (s.charAt(i) != ' ') {
+                j = i;
+                i = s.lastIndexOf(' ', i);
+                ans.append(s, i+1, j+1).append(" ");
+            }
+        }
+
+        return ans.toString().trim();
+    }
 }
