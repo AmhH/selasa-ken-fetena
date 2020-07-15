@@ -1,8 +1,5 @@
 package com.example.leet.july.week2;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 /**
  * Angle Between Hands of a Clock
  * Given two numbers, hour and minutes. Return the smaller angle (in degrees) formed between the hour and the minute

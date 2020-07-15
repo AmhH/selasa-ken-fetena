@@ -1,7 +1,5 @@
 package com.example.leet.may.week3;
 
-import java.util.Arrays;
-
 /**
  *  Odd Even Linked List
  *

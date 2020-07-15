@@ -1,7 +1,5 @@
 package com.example.leet.july.week2;
 
-import java.util.Map;
-
 /**
  * Reverse Bits
  * Reverse bits of a given 32 bits unsigned integer.

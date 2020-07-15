@@ -2,7 +2,6 @@ package com.example.leet.practice;
 
 import java.util.Arrays;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class RandomGenerate {
 
