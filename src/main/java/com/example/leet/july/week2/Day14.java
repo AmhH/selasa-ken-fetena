@@ -40,4 +40,19 @@ import java.util.HashSet;
  */
 public class Day14 {
 
+    public static double angleClock(int hour, int minutes) {
+        double minuteAngle = (360 / 60.0) * (minutes % 60);
+        double hourAngle = ((360 / 12.0) * (hour % 12)) + ((5 / 60.0) * minutes % 12) *6;
+        double angle = Math.abs(minuteAngle - hourAngle);
+        return angle > 180.0 ? 360.0 - angle : angle;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(angleClock(12, 30));
+        System.out.println(angleClock(3, 30));
+        System.out.println(angleClock(3, 15));
+        System.out.println(angleClock(4, 50));
+        System.out.println(angleClock(12, 0));
+        System.out.println(angleClock(1, 57));
+    }
 }
