@@ -31,6 +31,9 @@ public class Day16 {
         System.out.println(myPow1(2.00000, 10));
         System.out.println(myPow1(2.10000, 3));
         System.out.println(myPow1(2.00000, -2));
+
+        System.out.println(myPow(6.45600, -98));
+        System.out.println(myPow(87.08700, 24));
     }
 
     public static double myPow1(double x, int n) {
