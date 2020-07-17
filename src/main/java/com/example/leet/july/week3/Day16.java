@@ -23,6 +23,46 @@ package com.example.leet.july.week3;
  * n is a 32-bit signed integer, within the range [−231, 231 − 1]
  */
 public class Day16 {
+    public static double myPow(double x, int n) {
+        return Math.pow(x, n);
+    }
 
+    public static void main(String[] args) {
+        System.out.println(myPow1(2.00000, 10));
+        System.out.println(myPow1(2.10000, 3));
+        System.out.println(myPow1(2.00000, -2));
+    }
+
+    public static double myPow1(double x, int n) {
+        if (n == 0) return 1;
+        if (n == 1) return x;
+        if (x == 1.0) return 1;
+
+        if (x > 0 && n == Integer.MIN_VALUE) return 0;
+        if (x < 0 && n == Integer.MIN_VALUE) return 1;
+        if (x > 0 && n == Integer.MAX_VALUE) return 0;
+        if (x < 0 && n == Integer.MAX_VALUE) return -1;
+
+        double res = 1;
+        boolean powIsNegative = (n < 0);
+
+        res = fastpow(x, n);
+        if (powIsNegative) return 1 / res;
+
+        return res;
+    }
+
+    private static double fastpow(double x, int n) {
+        if (n == 0) return 1;
+
+        double half = fastpow(x, n / 2);
+
+        if (n % 2 == 0) {
+            return half * half;
+        } else {
+            return half * half * x;
+        }
+
+    }
 
 }
