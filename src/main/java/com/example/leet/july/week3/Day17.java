@@ -1,5 +1,7 @@
 package com.example.leet.july.week3;
 
+import java.util.*;
+
 /**
  * Top K Frequent Elements
  * Given a non-empty array of integers, return the k most frequent elements.
@@ -21,5 +23,24 @@ package com.example.leet.july.week3;
  */
 public class Day17 {
 
+    public static int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i : nums){
+            map.put(i, map.getOrDefault(i, 0) + 1);
+        }
+        PriorityQueue<Integer[]> maxHeap = new PriorityQueue<>((a, b) -> b[1] - a[1]);
+        map.forEach((key, value) -> maxHeap.offer(new Integer[]{key, value}));
+        int[] list = new int[k];
+        while(k > 0){
+            list[--k] = (maxHeap.poll()[0]);
+        }
 
+        return list;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(topKFrequent(new int[]{1,1,1,2,2,3}, 2)));
+        System.out.println(Arrays.toString(topKFrequent(new int[]{1,1,1,2,2,3}, 1)));
+        System.out.println(Arrays.toString(topKFrequent(new int[]{1}, 1)));
+    }
 }
