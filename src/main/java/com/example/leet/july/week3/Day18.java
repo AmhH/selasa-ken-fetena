@@ -44,5 +44,58 @@ import java.util.*;
  * Topological sort could also be done via BFS.{http://en.wikipedia.org/wiki/Topological_sorting#Algorithms)}
  */
 public class Day18 {
+    public static int[] findOrder(int numCourses, int[][] prerequisites) {
+        if(prerequisites.length == 0){
+            int[] result = new int[numCourses];
+            for (int i = 0; i < numCourses; i++) {
+                result[i] = i;
+            }
+            return result;
+        }
+        Map<Integer, Integer> inDegree = new HashMap<>();
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+        for (int i = 0; i < numCourses; i++) {
+            inDegree.putIfAbsent(i, 0);
+        }
+
+        for(int[] dependency : prerequisites){
+            List<Integer> list = graph.getOrDefault(dependency[0], new ArrayList<>());
+            list.add(dependency[1]);
+            graph.put(dependency[0], list);
+            inDegree.put(dependency[1], inDegree.getOrDefault(dependency[1], 0)+1);
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+        int[] result = new int[numCourses];
+        int index = numCourses;
+
+        for (Map.Entry<Integer, Integer> inEntry : inDegree.entrySet()) {
+            if(inEntry.getValue() == 0)
+                queue.offer(inEntry.getKey());
+        }
+
+        while(!queue.isEmpty()){
+            Integer node = queue.poll();
+            result[--index] = node;
+            for(Integer child : graph.getOrDefault(node, new ArrayList<>())){
+                inDegree.put(child, inDegree.get(child) - 1);
+                if(inDegree.get(child).equals(0))
+                    queue.add(child);
+            }
+        }
+
+        if(index == 0)
+            return result;
+
+
+        return new int[] {};
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(findOrder(1, new int[][]{})));
+        System.out.println(Arrays.toString(findOrder(2, new int[][]{{1,0}})));
+        System.out.println(Arrays.toString(findOrder(4, new int[][]{{1,0},{2,0},{3,1},{3,2}})));
+    }
+
 
 }
