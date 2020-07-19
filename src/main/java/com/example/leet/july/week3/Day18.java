@@ -42,6 +42,7 @@ import java.util.*;
  * Topological Sort.
  *    Hide Hint #3
  * Topological sort could also be done via BFS.{http://en.wikipedia.org/wiki/Topological_sorting#Algorithms)}
+ * Solution: https://leetcode.com/articles/course-schedule-ii/
  */
 public class Day18 {
     public static int[] findOrder(int numCourses, int[][] prerequisites) {
@@ -97,5 +98,87 @@ public class Day18 {
         System.out.println(Arrays.toString(findOrder(4, new int[][]{{1,0},{2,0},{3,1},{3,2}})));
     }
 
+    class Solution {
+        public int[] findOrder(int numCourses, int[][] prerequisites) {
+            //1.construct graph
+            int[] indegree = new int[numCourses];
+            List<Integer> [] neighs = new ArrayList[numCourses];
+            for(int i = 0; i < numCourses; i++){
+                neighs[i] = new ArrayList<>();
+            }
+            for(int pair = 0; pair < prerequisites.length; pair++){
+                indegree[prerequisites[pair][0]] += 1;
+                neighs[prerequisites[pair][1]].add(prerequisites[pair][0]);
+            }
+            //2. bfs
+            int count = 0;
+            int[] ans = new int[numCourses];
+            Queue<Integer> q = new LinkedList<>();
+            for(int i = 0; i < numCourses; i++){
+                if( indegree[i] == 0){
+                    q.offer(i);
+                }
+            }
+            while(q.size() != 0){
+                int finish = q.poll();
+                ans[count] = finish;
+                count++;
+                for(int neigh: neighs[finish]){
+                    indegree[neigh] -= 1;
+                    if(indegree[neigh] == 0){
+                        q.offer(neigh);
+                    }
+                }
+            }
+            if(count != numCourses){
+                ans = new int[0];
+            }
+            return ans;
+        }
+    }
 
+    class Solution1 {
+        int[] visited;
+        int[] result;
+        int[] courses;
+        int[] next;
+        int[] course;
+        int index = 0;
+
+        public int[] findOrder(int numCourses, int[][] prerequisites) {
+            visited = new int[numCourses]; //all 0s at first, 0: untouched
+            result = new int[numCourses];
+            courses = new int[numCourses];
+            Arrays.fill(courses, -1);
+            next = new int[prerequisites.length];
+            course = new int[prerequisites.length];
+
+            for (int i = 0; i < prerequisites.length; ++i) {
+                next[i] = courses[prerequisites[i][0]];
+                courses[prerequisites[i][0]] = i;
+                course[i] = prerequisites[i][1];
+            }
+
+            for (int i = 0; i < numCourses; ++i) {
+                if (cycle(i)) {
+                    return new int[0];//has cycle: return empty array
+                }
+            }
+
+            return result;
+        }
+
+        private boolean cycle(int num) {
+            if (visited[num] > 0) return visited[num] == 1;
+            visited[num] = 1; //touched
+            for (int i = courses[num]; i != -1; i = next[i]) {
+                if (cycle(course[i])) {
+                    return true;//will have cycle
+                }
+            }
+            visited[num] = 2; //checked
+            result[index++] = num;
+            return false; //will not form cycle
+        }
+    }
 }
