@@ -23,5 +23,28 @@ package com.example.leet.july.week3;
  * Each string is either "0" or doesn't contain any leading zero.
  */
 public class Day19 {
+    public String addBinary(String a, String b) {
+        StringBuilder builder = new StringBuilder();
+        int la = a.length() - 1;
+        int lb = b.length() - 1;
+        int carry = 0;
+        while (la >= 0 || lb >= 0){
+            int x = (la >= 0) ? Character.getNumericValue(a.charAt(la)) : 0;
+            int y = (lb >= 0) ? Character.getNumericValue(b.charAt(lb)) : 0;
+            builder.append((x + y + carry)%2);
+            carry = (x + y + carry)/2;
+            la--;
+            lb--;
+        }
 
+        if(carry > 0)
+            builder.append(carry);
+
+        return builder.reverse().toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Day19().addBinary("11", "1"));
+        System.out.println(new Day19().addBinary("1010", "1011"));
+    }
 }
