@@ -47,4 +47,43 @@ public class Day19 {
         System.out.println(new Day19().addBinary("11", "1"));
         System.out.println(new Day19().addBinary("1010", "1011"));
     }
+
+    class Solution {
+        public String addBinary(String a, String b) {
+
+            int m = a.length();
+            int n = b.length();
+
+            if(m < 1 || n < 1)
+                return null;
+
+            if(m < n)
+                return addBinary(b, a);
+
+            int carry = 0;
+            int j = n - 1;
+            StringBuilder sb = new StringBuilder();
+
+            for(int i = m - 1; i >= 0; i--) {
+                if(a.charAt(i) == '1')
+                    carry++;
+                if(j > -1 && b.charAt(j--) == '1')
+                    carry++;
+
+                if(carry % 2 == 1)
+                    sb.append("1");
+                else
+                    sb.append("0");
+
+                carry /= 2;
+            }
+
+            if(carry == 1)
+                sb.append("1");
+
+            sb.reverse();
+
+            return sb.toString();
+        }
+    }
 }
