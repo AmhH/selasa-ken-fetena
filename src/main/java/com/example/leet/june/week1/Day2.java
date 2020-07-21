@@ -1,5 +1,7 @@
 package com.example.leet.june.week1;
 
+import com.example.leet.util.ListNode;
+
 /**
  * Delete Node in a Linked List
  * Write a function to delete a node (except the tail) in a singly linked list, given only access to that node.
@@ -26,15 +28,6 @@ package com.example.leet.june.week1;
  * Do not return anything from your function.
  */
 public class Day2 {
-
-    /**
-     * Definition for singly-linked list.
-     */
-      public static class ListNode {
-          int val;
-          ListNode next;
-          ListNode(int x) { val = x; }
-      }
 
     public static void deleteNode(ListNode node) {
         node.val = node.next.val;

@@ -1,5 +1,9 @@
 package com.example.leet.may.week3;
 
+import com.example.leet.util.ListNode;
+
+import static com.example.leet.util.ListNode.createNodeFromArray;
+
 /**
  *  Odd Even Linked List
  *
@@ -22,20 +26,7 @@ package com.example.leet.may.week3;
  * The first node is considered odd, the second node even and so on ...
  */
 public class Day16 {
-    /**
-     * Definition for singly-linked list.
-     */
-    public static class ListNode {
-         int val;
-          ListNode next;
-          ListNode(int x) { val = x; }
-        public void printAll(){
-            System.out.print(val + "-> ");
-            if (next != null){
-                next.printAll();
-            }
-        }
-      }
+
 
     public static ListNode oddEvenList(ListNode head) {
         ListNode odd = head;
@@ -63,14 +54,5 @@ public class Day16 {
         oddEvenList(node1).printAll();
         System.out.println();
         oddEvenList(node2).printAll();
-    }
-    private static ListNode createNodeFromArray(int[] ints) {
-        ListNode head = new ListNode(ints[0]);
-        ListNode tail = head;
-        for(int i = 1; i < ints.length; i++){
-            tail.next = new ListNode(ints[i]);
-            tail= tail.next;
-        }
-        return head;
     }
 }

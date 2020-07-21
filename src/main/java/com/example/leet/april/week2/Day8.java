@@ -1,5 +1,7 @@
 package com.example.leet.april.week2;
 
+import com.example.leet.util.ListNode;
+
 /**
  * Middle of the Linked List
  * Given a non-empty, singly linked list with head node head, return a middle node of linked list.
@@ -56,15 +58,8 @@ public class Day8 {
 
     public static void main(String[] args) {
         //1,2,3,4,5
-        ListNode head =  new ListNode(1);
-        ListNode head2 =  new ListNode(2);
-        ListNode head3 =  new ListNode(3);
-        ListNode head4 =  new ListNode(4);
-        ListNode head5 =  new ListNode(5);
-        head.next = head2;
-        head2.next = head3;
-        head3.next = head4;
-        head4.next = head5;
+        ListNode head = ListNode.createNodeFromArray(new int[]{1,2,3,4,5});
+
 
         ListNode listNode = middleNode2(head);
 
@@ -75,13 +70,7 @@ public class Day8 {
 
         System.out.println("***************");
         //[1,2,3,4,5,6,7,8]
-        ListNode head6 = new ListNode(6);
-        ListNode head7 = new ListNode(7);
-        ListNode head8 = new ListNode(8);
-
-        head5.next = head6;
-        head6.next = head7;
-        head7.next = head8;
+        head = ListNode.createNodeFromArray(new int[]{1,2,3,4,5,6,7,8});
 
         ListNode listNode2 = middleNode2(head);
 
@@ -91,11 +80,5 @@ public class Day8 {
         }
     }
 
-
-    public static class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) { val = x; }
-    }
 }
 
