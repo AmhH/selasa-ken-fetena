@@ -17,8 +17,9 @@ public class ListNode {
     }
 
     public void printAll() {
-        System.out.print(val + "-> ");
+        System.out.print(val);
         if (next != null) {
+            System.out.print("->");
             next.printAll();
         }
     }
