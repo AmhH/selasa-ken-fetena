@@ -1,53 +1,35 @@
 package com.example.leet.july.week3;
 
-import com.example.leet.util.ListNode;
-
 /**
- * Remove Linked List Elements
- * Remove all elements from a linked list of integers that have value val.
+ * Word Search
+ * Given a 2D board and a word, find if the word exists in the grid.
+ *
+ * The word can be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those
+ * horizontally or vertically neighboring. The same letter cell may not be used more than once.
  *
  * Example:
  *
- * Input:  1->2->6->3->4->5->6, val = 6
- * Output: 1->2->3->4->5
+ * board =
+ * [
+ *   ['A','B','C','E'],
+ *   ['S','F','C','S'],
+ *   ['A','D','E','E']
+ * ]
+ *
+ * Given word = "ABCCED", return true.
+ * Given word = "SEE", return true.
+ * Given word = "ABCB", return false.
+ *
+ *
+ * Constraints:
+ *
+ * board and word consists only of lowercase and uppercase English letters.
+ * 1 <= board.length <= 200
+ * 1 <= board[i].length <= 200
+ * 1 <= word.length <= 10^3
  */
 public class Day21 {
 
-    public static ListNode removeElements(ListNode head, int val) {
-        if(head == null){
-            return null;
-        }
-        ListNode node = new ListNode(-1);
-        node.next = head;
-        head = node;
-        while(node.next != null){
-            if(node.next.val == val){
-                node.next = node.next.next;
-            }else {
-                node = node.next;
-            }
-        }
 
-        return head.next;
-    }
 
-    public static void main(String[] args) {
-        ListNode head = ListNode.createNodeFromArray(new int[]{1, 2, 6, 3, 4, 5, 6});
-        ListNode node = removeElements(head, 6);
-        node.printAll();
-    }
-
-    public ListNode removeElements1(ListNode head, int val) {
-        if(head == null) {
-            return null;
-        }
-        ListNode ret = removeElements1(head.next, val);
-
-        if(head.val == val) {
-            return ret;
-        }
-
-        head.next = ret;
-        return head;
-    }
 }
