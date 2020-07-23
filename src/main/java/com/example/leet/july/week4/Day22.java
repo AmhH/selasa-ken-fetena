@@ -65,5 +65,32 @@ public class Day22 {
         System.out.println(node);
     }
 
+    class Solution {
+        public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+            List<List<Integer>> resList = new ArrayList<>();
 
+            zigzagLevelOrder(root, 0, resList);
+
+            return resList;
+        }
+
+        private void zigzagLevelOrder(TreeNode node, int level, List<List<Integer>> resList) {
+            if(node == null) {
+                return;
+            } else {
+                if(resList.size() == level) {
+                    resList.add(new LinkedList<>());
+                }
+
+                if(level % 2 == 0) {
+                    ((LinkedList<Integer>)resList.get(level)).addLast(node.val);
+                } else {
+                    ((LinkedList<Integer>)resList.get(level)).addFirst(node.val);
+                }
+
+                zigzagLevelOrder(node.left, level + 1, resList);
+                zigzagLevelOrder(node.right, level + 1, resList);
+            }
+        }
+    }
 }
