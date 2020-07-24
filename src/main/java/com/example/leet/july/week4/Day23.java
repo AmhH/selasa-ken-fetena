@@ -81,5 +81,21 @@ public class Day23 {
         System.out.println(Arrays.toString(singleNumber(new int[]{1, 2, 1, 3, 2, 5})));
     }
 
+    class Solution {
+        public int[] singleNumber(int[] nums) {
+            int bitmask = 0;
+            for(int n: nums)
+                bitmask ^= n;
 
+            int diff = bitmask&(-bitmask);
+
+            int x = 0;
+            for(int n: nums){
+                if((diff&n) != 0)
+                    x ^= n;
+            }
+
+            return new int[]{x,bitmask^x};
+        }
+    }
 }
