@@ -55,4 +55,31 @@ import java.util.Arrays;
  */
 public class Day23 {
 
+    public static int[] singleNumber(int[] nums) {
+        // Pass 1 :
+        // Get the XOR of the two numbers we need to find
+        int diff = 0;
+        for (int num : nums) {
+            diff ^= num;
+        }
+        // Get its last set bit
+        diff &= -diff;
+
+        // Pass 2 :
+        int[] singles = {0, 0}; // this array stores the two numbers we will return
+        for (int num : nums) {
+            if ((num & diff) == 0) { // the bit is not set
+                singles[0] ^= num;
+            } else { // the bit is set
+                singles[1] ^= num;
+            }
+        }
+        return singles;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(singleNumber(new int[]{1, 2, 1, 3, 2, 5})));
+    }
+
+
 }
