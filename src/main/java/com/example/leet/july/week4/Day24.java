@@ -54,4 +54,55 @@ public class Day24 {
         System.out.println(allPathsSourceTarget(new int[][]{{1,2}, {3}, {3}, {}}));
         System.out.println(allPathsSourceTarget(new int[][]{{4,3,1},{3,2,4},{3},{4},{}}));
     }
+
+    //2 ms
+    class Solution {
+        public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+            List<List<Integer>> ans = new ArrayList();
+            List<Integer> path = new ArrayList();
+            path.add(0);
+            backtrack(ans, path, graph);
+            return ans;
+        }
+
+        public void backtrack(List<List<Integer>> ans, List<Integer> path, int[][] graph) {
+            if (path.get(path.size() - 1) == graph.length - 1) {
+                ans.add(new ArrayList(path));
+                return;
+            }
+
+            for (int nei: graph[path.get(path.size() - 1)]) {
+                path.add(nei);
+                backtrack(ans, path, graph);
+                path.remove(path.size() - 1);
+            }
+        }
+    }
+
+    //1 ms
+    class Solution1 {
+        List<List<Integer>> ans=new  ArrayList<List<Integer>>();
+        public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+            boolean[] visited=new boolean[graph.length];
+            List<Integer> path=new ArrayList<>();
+            visited[0]=true;
+            path.add(0);
+            dfs(graph,visited,0,path);
+            return ans;
+        }
+        public void dfs(int[][] graph,boolean[] visited,int u,List<Integer> path){
+            if(u==graph.length-1){
+                ans.add(new ArrayList<>(path));
+                return;
+            }
+            for(int i=0;i<graph[u].length;i++){
+                int v=graph[u][i];
+                visited[v]=true;
+                path.add(v);
+                dfs(graph,visited,v,path);
+                visited[v]=false;
+                path.remove(path.size()-1);//}
+            }
+        }
+    }
 }
