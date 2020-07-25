@@ -1,5 +1,6 @@
 package com.example.leet.july.week4;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,5 +28,30 @@ import java.util.List;
  */
 public class Day24 {
 
+    public static List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        List<List<Integer>> result = new LinkedList<>();
 
+        allPathsSourceTarget(graph, 0, graph.length - 1, new LinkedList<>(), result);
+        return result;
+    }
+
+    private static void allPathsSourceTarget(int[][] graph, int source, int destination, List<Integer> path,
+                                             List<List<Integer>> result) {
+        if(source == destination){
+            path.add(source);
+            result.add(path);
+            return;
+        }
+        path.add(source);
+
+        for(int adj : graph[source]){
+            List<Integer> copyPath = new LinkedList<>(path);
+            allPathsSourceTarget(graph, adj, destination, copyPath, result);
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(allPathsSourceTarget(new int[][]{{1,2}, {3}, {3}, {}}));
+        System.out.println(allPathsSourceTarget(new int[][]{{4,3,1},{3,2,4},{3},{4},{}}));
+    }
 }
