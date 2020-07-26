@@ -41,9 +41,16 @@ public class Day25 {
         System.out.println(findMin(new int[]{2,2,2,0,1}));
         System.out.println(findMin(new int[]{4,5,6,7,0,1,2}));
         System.out.println(findMin(new int[]{1,1}));
+
+        System.out.println("___________________________");
+
+        System.out.println(findMin1(new int[]{1,3,5}));
+        System.out.println(findMin1(new int[]{2,2,2,0,1}));
+        System.out.println(findMin1(new int[]{4,5,6,7,0,1,2}));
+        System.out.println(findMin1(new int[]{1,1}));
     }
 
-    public int findMin1(int[] nums) {
+    public static int findMin1(int[] nums) {
         int lo =0;
         int n = nums.length;
         int hi = n-1;
