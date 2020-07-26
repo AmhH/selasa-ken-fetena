@@ -24,9 +24,7 @@ package com.example.leet.july.week4;
  */
 public class Day26 {
     public static int addDigits(int num) {
-        if(num == 0)
-            return num;
-        return 1 + ((num - 1) % 9);// 1 + ((num - 1) % (base -1));
+        return num == 0 ? 0 : 1 + (num - 1) % 9;// 1 + ((num - 1) % (base -1));
     }
 
     public static void main(String[] args) {
