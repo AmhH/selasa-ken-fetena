@@ -4,7 +4,6 @@ import com.example.leet.util.TreeNode;
 
 /**
  * Binary Tree Maximum Path Sum
- * Solution
  * Given a non-empty binary tree, find the maximum path absoluteSum.
  *
  * For this problem, a path is defined as any sequence of nodes from some starting node to any node in the tree along
