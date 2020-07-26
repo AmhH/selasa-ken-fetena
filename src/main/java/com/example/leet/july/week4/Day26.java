@@ -23,5 +23,17 @@ package com.example.leet.july.week4;
  * You may find this Wikipedia article useful.
  */
 public class Day26 {
+    public static int addDigits(int num) {
+        if(num == 0)
+            return num;
+        return 1 + ((num - 1) % 9);// 1 + ((num - 1) % (base -1));
+    }
 
+    public static void main(String[] args) {
+        System.out.println(addDigits(0));
+        System.out.println(addDigits(9));
+        System.out.println(addDigits(10));
+        System.out.println(addDigits(456678));
+        System.out.println(addDigits(29));
+    }
 }
