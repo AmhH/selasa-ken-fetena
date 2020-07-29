@@ -1,5 +1,7 @@
 package com.example.leet.july.week4;
 
+import java.util.Arrays;
+
 /**
  * Task Scheduler
  * You are given a char array representing tasks CPU need to do. It contains capital letters A to Z where each letter
@@ -74,5 +76,28 @@ public class Day28 {
         System.out.println(leastInterval(new char[]{'A','A','A','B','B','B'}, 2));
         System.out.println(leastInterval(new char[]{'A','A','A','B','B','B'}, 0));
         System.out.println(leastInterval(new char[]{'A','A','A','A','A','A','B','C','D','E','F','G'}, 2));
+    }
+
+    public int leastInterval2(char[] tasks, int n) {
+
+        int [] arr = new int [26];
+
+        for(char task : tasks)
+            arr[task-'A']++;
+
+        Arrays.sort(arr);
+
+        int frequent = arr[25]-1;
+
+        int idleSlots = frequent*n;
+
+        for(int i=24;i>=0;i--)
+            idleSlots = idleSlots - Math.min(arr[i],frequent);
+
+
+        if(idleSlots>0)
+            return idleSlots+tasks.length;
+        else
+            return tasks.length;
     }
 }
