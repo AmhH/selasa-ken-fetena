@@ -1,7 +1,6 @@
 package com.example.leet.july.week5;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Word Break II
@@ -44,8 +43,40 @@ import java.util.List;
  */
 public class Day30 {
 
+    static Map<Integer, List<String>> map;
     public static List<String> wordBreak(String s, List<String> wordDict) {
+        map = new HashMap<>();
+        return wordBreakHelper(s, s.length(), wordDict);
+    }
 
+    private static List<String> wordBreakHelper(String input, int end, List<String> wordDict) {
+        List<String> res = new ArrayList<>();
+
+        // We have traversed the input and are done with breaking up the word
+        if(end == 0) return new ArrayList<>(Arrays.asList(""));
+
+        // Using dynamic programming for optimisation
+        // where the same words will have to broken down again
+        if (map.containsKey(end)) {
+            return map.get(end);
+        }
+
+        // Keeping the end at the end of the input
+        // start counter moves along the input letters
+        for (int start = 0; start < end; start++) {
+            String sub = input.substring(start, end);
+            if(wordDict.contains(sub)){
+                // Once the last word in the input is found in the dictionary,
+                // we repeat the wordbreak
+                List<String> tmpList = wordBreakHelper(input, start, wordDict);
+                // and append the 'sub' at the end of every phrase in tmpList
+                for (String tmpStr : tmpList){
+                    res.add(tmpStr.length() == 0 ? sub : tmpStr + " " + sub);
+                }
+            }
+        }
+        map.put(end, res);
+        return res;
     }
 
     public static void main(String[] args) {
