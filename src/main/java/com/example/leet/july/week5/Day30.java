@@ -84,4 +84,56 @@ public class Day30 {
         System.out.println(wordBreak("pineapplepenapple", Arrays.asList("apple", "pen", "applepen", "pine", "pineapple")));
         System.out.println(wordBreak("catsandog", Arrays.asList("cats", "dog", "sand", "and", "cat")));
     }
+
+    public List<String> wordBreak8(String s, List<String> wordDict) {
+        Set<String> input = new HashSet<>();
+        Map<String, List<String>> map = new HashMap<>();
+
+        for (String word : wordDict) {
+            input.add(word);
+        }
+
+        List<String> result = new ArrayList<String>();
+
+        return wordBreak(s, result, input, "", map);
+    }
+
+
+    private List<String> wordBreak(String word, List<String> result1, Set input, String partialWord3, Map<String,
+            List<String>> map) {
+
+        List<String> result = new ArrayList<>();
+
+        // find the first match
+        int len = word.length();
+        if (len == 0) {
+            return result;
+        }
+        if (map.containsKey(word)) {
+            return map.get(word);
+        }
+
+        for (int i = 1; i <= len; i++) {
+            String nextWord = word.substring(0, i);
+
+            if (input.contains(nextWord)) {
+                String newWord;
+
+                if (i < len) {
+                    newWord = word.substring(i, len);
+                } else {
+                    result.add(nextWord);
+                    break;
+                }
+                List<String> result2 = wordBreak(newWord, result1, input, "", map);
+                for (String temp : result2) {
+                    String s = nextWord + " " + temp;
+                    result.add(s);
+                }
+            }
+        }
+
+        map.put(word, result);
+        return result;
+    }
 }
