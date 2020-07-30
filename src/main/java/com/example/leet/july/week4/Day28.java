@@ -76,9 +76,10 @@ public class Day28 {
         System.out.println(leastInterval(new char[]{'A','A','A','B','B','B'}, 2));
         System.out.println(leastInterval(new char[]{'A','A','A','B','B','B'}, 0));
         System.out.println(leastInterval(new char[]{'A','A','A','A','A','A','B','C','D','E','F','G'}, 2));
+        System.out.println(leastInterval2(new char[]{'A','A','A','A','A','A','B','C','D','E','F','G'}, 2));
     }
 
-    public int leastInterval2(char[] tasks, int n) {
+    public static int leastInterval2(char[] tasks, int n) {
 
         int [] arr = new int [26];
 
