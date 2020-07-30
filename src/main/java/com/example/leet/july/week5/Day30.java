@@ -136,4 +136,39 @@ public class Day30 {
         map.put(word, result);
         return result;
     }
+
+    public List<String> wordBreak1(String s, List<String> wordDict) {
+        int max = 0;
+        Set<String> dict = new HashSet<>();
+        for (String w : wordDict) {
+            dict.add(w);
+            max = Math.max(max, w.length());
+        }
+        List<String> res = new ArrayList<>();
+
+        dfs(s, res, new StringBuilder(), 0, max, dict, new boolean[s.length()+1]);
+
+        return res;
+    }
+
+    private void dfs(String s, List<String> res, StringBuilder sb, int index, int max, Set<String> dict, boolean[] notvalid) {
+        if (index == s.length()) {
+            res.add(sb.toString());
+            return;
+        }
+        //    System.out.println(sb.toString() + " index:" + index );
+        for (int i = index + 1; i <= index + max && i <= s.length(); i++) {
+            if (!notvalid[i]) {
+                if (dict.contains(s.substring(index, i))) {
+                    int oldLength = sb.length();
+                    int oldSize = res.size();
+                    if (oldLength != 0) sb.append(" ");
+                    sb.append(s, index, i);
+                    dfs(s, res, sb, i, max, dict, notvalid);
+                    if (oldSize == res.size()) notvalid[i] = true;
+                    sb.delete(oldLength, sb.length());
+                }
+            }
+        }
+    }
 }
