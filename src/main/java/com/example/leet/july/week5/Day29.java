@@ -16,4 +16,35 @@ package com.example.leet.july.week5;
  * Explanation: transactions = [buy, sell, cooldown, buy, sell]
  */
 public class Day29 {
+    public static int maxProfit(int[] prices) {
+        if(prices == null || prices.length <= 1) return 0;
+
+        int b0 = -prices[0], b1 = b0;
+        int s0 = 0, s1 = 0, s2 = 0;
+
+        for(int i = 1; i < prices.length; i++) {
+            b0 = Math.max(b1, s2 - prices[i]);
+            s0 = Math.max(s1, b1 + prices[i]);
+            b1 = b0; s2 = s1; s1 = s0;
+        }
+        return s0;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(maxProfit(new int[]{1,2,3,0,2}));
+        System.out.println(maxProfit2(new int[]{1,2,3,0,2}));
+    }
+
+    public static int maxProfit2(int[] prices) {
+        int sold = Integer.MIN_VALUE;
+        int held = Integer.MIN_VALUE;
+        int reset = 0;
+        for(int i = 0; i < prices.length; i ++){
+            int preSold = sold;
+            sold = held + prices[i];
+            held = Math.max(held, reset - prices[i]);
+            reset = Math.max(reset, preSold);
+        }
+        return Math.max(sold, reset);
+    }
 }
