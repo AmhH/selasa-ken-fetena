@@ -23,4 +23,48 @@ package com.example.leet.august.week1;
  */
 public class Day1 {
 
+    public static boolean detectCapitalUse(String word) {
+        if (word.length() == 1) {
+            return true;
+        }
+        boolean upperCase = Character.isUpperCase(word.charAt(0));
+        char[] chars = word.toCharArray();
+        for (int i = 1; i < chars.length; i++) {
+            if(upperCase && i == 1){
+                upperCase = Character.isUpperCase(chars[i]);
+                continue;
+            }
+            if (upperCase != Character.isUpperCase(chars[i]))
+                return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(detectCapitalUse("USA"));
+        System.out.println(detectCapitalUse("FlaG"));
+        System.out.println(detectCapitalUse("leetcode"));
+        System.out.println(detectCapitalUse("leetCode"));
+        System.out.println(detectCapitalUse1("Google"));
+    }
+
+    public static boolean detectCapitalUse1(String word) {
+        int lastCap = -1;
+        for(int i = 0; i < word.length(); i++) {
+            char c = word.charAt(i);
+            if(c >= 'A' && c <= 'Z') {
+                if(lastCap + 1 == i) {
+                    lastCap++;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        if(lastCap == -1 || lastCap == word.length() - 1 || lastCap == 0) {
+            return true;
+        }
+
+        return false;
+    }
 }
