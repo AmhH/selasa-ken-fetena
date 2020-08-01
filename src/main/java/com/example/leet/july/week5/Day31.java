@@ -24,5 +24,37 @@ package com.example.leet.july.week5;
  */
 public class Day31 {
 
+    public static int climbStairs(int n) {
+        return climbStairsHelper(n, new int[n+1]);
+    }
 
+    private static int climbStairsHelper(int n, int[] memo) {
+        if(n==0 || n==1){
+            return 1;
+        }
+        if(memo[n] > 0)
+            return memo[n];
+        int res = climbStairsHelper(n-1, memo) + climbStairsHelper(n-2, memo);
+        memo[n] = res;
+        return res;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(climbStairs(2));
+        System.out.println(climbStairs(3));
+        System.out.println(climbStairs(8));
+        System.out.println(climbStairs1(8));
+    }
+
+    public static int climbStairs1(int n) {
+        if(n == 1 || n == 2)
+            return n;
+        int result = 1, prev1 = 1, prev2 = 2;
+        for(int i = 3; i <= n; i++) {
+            result = prev1 + prev2;
+            prev1 = prev2;
+            prev2 = result;
+        }
+        return result;
+    }
 }
