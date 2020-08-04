@@ -30,32 +30,42 @@ package com.example.leet.august.week1;
  */
 public class Day2 {
 
-    class MyHashSet {
+    static class MyHashSet {
 
-        /** Initialize your data structure here. */
+        private final boolean[] array;
+
+        /**
+         * Initialize your data structure here.
+         */
         public MyHashSet() {
-
+            this.array = new boolean[1000000];
         }
 
         public void add(int key) {
-
+            this.array[key] = true;
         }
 
         public void remove(int key) {
-
+            this.array[key] = false;
         }
 
-        /** Returns true if this set contains the specified element */
+        /**
+         * Returns true if this set contains the specified element
+         */
         public boolean contains(int key) {
-
+            return array[key];
         }
     }
 
-/**
- * Your MyHashSet object will be instantiated and called as such:
- * MyHashSet obj = new MyHashSet();
- * obj.add(key);
- * obj.remove(key);
- * boolean param_3 = obj.contains(key);
- */
+    public static void main(String[] args) {
+        MyHashSet hashSet = new MyHashSet();
+        hashSet.add(1);
+        hashSet.add(2);
+        System.out.println(hashSet.contains(1));    // returns true
+        System.out.println(hashSet.contains(3));    // returns false (not found)
+        hashSet.add(2);
+        System.out.println(hashSet.contains(2));    // returns true
+        hashSet.remove(2);
+        System.out.println(hashSet.contains(2));    // returns false (already removed)
+    }
 }
