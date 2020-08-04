@@ -1,5 +1,11 @@
 package com.example.leet.august.week1;
 
+import com.example.leet.util.MyFormatter;
+
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Logger;
+
 /**
  * Valid Palindrome
  * Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
@@ -20,6 +26,7 @@ package com.example.leet.august.week1;
  * s consists only of printable ASCII characters.
  */
 public class Day3 {
+    private static final Logger LOGGER = Logger.getLogger(Day3.class.getName());
     public static boolean isPalindrome(String s) {
         int start = 0, end = s.length() - 1;
         while (start < end){
@@ -38,15 +45,18 @@ public class Day3 {
     }
 
     public static void main(String[] args) {
-        System.out.println(isPalindrome("A man, a plan, a canal: Panama"));     //true
-        System.out.println(isPalindrome("race a car"));     //false
-        System.out.println(isPalindrome("mom"));        //true
-        System.out.println(isPalindrome("Anna"));       //true
-        System.out.println(isPalindrome("   "));        //true
-        System.out.println(isPalindrome(""));           //true
-        System.out.println(isPalindrome(".,"));         //true
-        System.out.println(isPalindrome("."));          //true
-        System.out.println(isPalindrome1("."));          //true
+        Handler handler = new ConsoleHandler();
+        handler.setFormatter(new MyFormatter());
+        LOGGER.addHandler(handler);
+        LOGGER.info(String.valueOf(isPalindrome("A man, a plan, a canal: Panama")));     //true
+        LOGGER.info(String.valueOf(isPalindrome("race a car")));     //false
+        LOGGER.info(String.valueOf(isPalindrome("mom")));        //true
+        LOGGER.info(String.valueOf(isPalindrome("Anna")));       //true
+        LOGGER.info(String.valueOf(isPalindrome("   ")));        //true
+        LOGGER.info(String.valueOf(isPalindrome("")));           //true
+        LOGGER.info(String.valueOf(isPalindrome(".,")));         //true
+        LOGGER.info(String.valueOf(isPalindrome(".")));          //true
+        LOGGER.info(String.valueOf(isPalindrome1(".")));          //true
     }
 
     public static boolean isPalindrome1(String s) {
