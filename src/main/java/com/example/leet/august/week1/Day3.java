@@ -4,6 +4,7 @@ import com.example.leet.util.MyFormatter;
 
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -45,18 +46,16 @@ public class Day3 {
     }
 
     public static void main(String[] args) {
-        Handler handler = new ConsoleHandler();
-        handler.setFormatter(new MyFormatter());
-        LOGGER.addHandler(handler);
-        LOGGER.info(String.valueOf(isPalindrome("A man, a plan, a canal: Panama")));     //true
-        LOGGER.info(String.valueOf(isPalindrome("race a car")));     //false
-        LOGGER.info(String.valueOf(isPalindrome("mom")));        //true
-        LOGGER.info(String.valueOf(isPalindrome("Anna")));       //true
-        LOGGER.info(String.valueOf(isPalindrome("   ")));        //true
-        LOGGER.info(String.valueOf(isPalindrome("")));           //true
-        LOGGER.info(String.valueOf(isPalindrome(".,")));         //true
-        LOGGER.info(String.valueOf(isPalindrome(".")));          //true
-        LOGGER.info(String.valueOf(isPalindrome1(".")));          //true
+
+        LOGGER.log(Level.INFO, String.valueOf(isPalindrome("A man, a plan, a canal: Panama")));     //true
+        LOGGER.log(Level.INFO, String.valueOf(isPalindrome("race a car")));     //false
+        LOGGER.log(Level.INFO, String.valueOf(isPalindrome("mom")));        //true
+        LOGGER.log(Level.INFO, String.valueOf(isPalindrome("Anna")));       //true
+        LOGGER.log(Level.INFO, String.valueOf(isPalindrome("   ")));        //true
+        LOGGER.log(Level.INFO, String.valueOf(isPalindrome("")));           //true
+        LOGGER.log(Level.INFO, String.valueOf(isPalindrome(".,")));         //true
+        LOGGER.log(Level.INFO, String.valueOf(isPalindrome(".")));          //true
+        LOGGER.log(Level.INFO, String.valueOf(isPalindrome1(".")));          //true
     }
 
     public static boolean isPalindrome1(String s) {
