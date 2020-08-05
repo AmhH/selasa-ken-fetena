@@ -15,5 +15,16 @@ package com.example.leet.august.week1;
  * Follow up: Could you solve it without loops/recursion?
  */
 public class Day4 {
+    public static boolean isPowerOfFour(int num) {
+        if(num <= 0) return false;
+        double logValue = Math.log(num)/Math.log(4);
+        return (logValue % 1) == 0 ;
+    }
 
+    public static void main(String[] args) {
+        System.out.println(isPowerOfFour(16));
+        System.out.println(isPowerOfFour(5));
+        System.out.println(isPowerOfFour(32));
+        System.out.println(isPowerOfFour(64));
+    }
 }
