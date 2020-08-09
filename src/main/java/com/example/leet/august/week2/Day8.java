@@ -2,6 +2,9 @@ package com.example.leet.august.week2;
 
 import com.example.leet.util.TreeNode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Path Sum III
  * You are given a binary tree in which each node contains an integer value.
@@ -47,5 +50,33 @@ public class Day8 {
             s++;
         }
         return s;
+    }
+
+    public int pathSum2(TreeNode root, int sum) {
+        // prefixSum, numOccurrence
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+
+        return dfs(root, sum, map, 0);
+    }
+
+    private int dfs(TreeNode curr, int target, Map<Integer, Integer> map, int sumSoFar) {
+        if (curr == null) return 0;
+
+        sumSoFar += curr.val;
+
+        int res = map.getOrDefault(sumSoFar - target, 0);
+        map.put(sumSoFar, map.getOrDefault(sumSoFar, 0) + 1);
+
+        res += dfs(curr.left, target, map, sumSoFar) + dfs(curr.right, target, map, sumSoFar);
+        map.put(sumSoFar, map.get(sumSoFar) - 1);
+
+        return res;
+    }
+
+    public static void main(String[] args) {
+        TreeNode node = TreeNode.createTreeFromArray(new int[]{10, 5, -3, 3, 2, 0, 11, 3, -2, 0, 1});
+        System.out.println(new Day8().pathSum(node, 8));
+        System.out.println(new Day8().pathSum2(node , 8));
     }
 }
