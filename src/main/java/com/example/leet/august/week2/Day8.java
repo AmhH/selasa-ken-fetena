@@ -31,4 +31,21 @@ import com.example.leet.util.TreeNode;
  */
 public class Day8 {
 
+    public int pathSum(TreeNode root, int sum) {
+        if(root == null) {
+            return 0;
+        }
+        return pathSumHelper(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);
+    }
+
+    private int pathSumHelper(TreeNode root, int sum) {
+        if(root == null) {
+            return 0;
+        }
+        int s = pathSumHelper(root.left, sum-root.val) + pathSumHelper(root.right, sum-root.val);
+        if(root.val == sum) {
+            s++;
+        }
+        return s;
+    }
 }
