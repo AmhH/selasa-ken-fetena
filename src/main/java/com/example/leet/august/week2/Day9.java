@@ -36,6 +36,6 @@ package com.example.leet.august.week2;
 public class Day9 {
 
     public int orangesRotting(int[][] grid) {
-
+        return 0;
     }
 }
