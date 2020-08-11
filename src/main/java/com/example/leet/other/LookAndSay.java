@@ -51,7 +51,7 @@ public class LookAndSay {
     }
 
     public static void main(String[] args) {
-        System.out.println(lookAndSay(3));
-        System.out.println(lookAndSay(8));
+        System.out.println(lookAndSay(3));//21
+        System.out.println(lookAndSay(8));//1113213211
     }
 }
