@@ -36,5 +36,22 @@ package com.example.leet.august.week2;
  */
 public class Day10 {
 
+    public static int titleToNumber(String s) {
+        return s.chars().reduce(0, (result, ch) -> result*26 + (ch - 'A' + 1));
+    }
 
+    public static int titleToNumber2(String s){
+        int result = 0;
+        for (int i = 0; i < s.length(); i++){
+            result = result * 26 + (s.charAt(i) - 'A' + 1);
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(titleToNumber("A"));
+        System.out.println(titleToNumber("AB"));
+        System.out.println(titleToNumber("ZY"));
+        System.out.println(titleToNumber2("ZY"));
+    }
 }
