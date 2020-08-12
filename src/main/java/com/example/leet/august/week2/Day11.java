@@ -27,4 +27,28 @@ package com.example.leet.august.week2;
  */
 public class Day11 {
 
+    public static int hIndex(int[] citations) {
+        int size = citations.length;
+        int[] bucket = new int[size + 1];
+        for (int i = 0; i < size; i++) {
+            if(citations[i] >= size)
+                bucket[size]++;
+            else
+                bucket[citations[i]]++;
+        }
+
+        int count = 0;
+        for (int i = size; i >= 0; i--) {
+            count += bucket[i];
+            if(count >= i)
+                return i;
+        }
+
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(hIndex(new int[]{3,0,6,1,5}));
+        System.out.println(hIndex(new int[]{0, 0}));
+    }
 }
