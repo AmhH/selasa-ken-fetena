@@ -44,11 +44,12 @@ public class DeletionDistance {
             return Math.max(lcs(s1, s2, m, n - 1), lcs(s1, s2, m - 1, n));
     }
 
-    public int minDistanceMemo(String s1, String s2) {
+    public static int minDistanceMemo(String s1, String s2) {
         int[][] memo = new int[s1.length()+1][s2.length()+1];
         return s1.length() + s2.length() - 2 * lcsMemo(s1, s2, s1.length(), s2.length(), memo);
     }
-    public int lcsMemo(String s1, String s2, int m, int n, int[][] memo) {
+
+    public static int lcsMemo(String s1, String s2, int m, int n, int[][] memo) {
         if (m == 0 || n == 0)
             return 0;
         if(memo[m][n] > 0)
@@ -60,7 +61,7 @@ public class DeletionDistance {
         return memo[m][n];
     }
 
-    public int minDistanceDP(String s1, String s2) {
+    public static int minDistanceDP(String s1, String s2) {
         int[][] dp = new int[s1.length() + 1][s2.length() + 1];
         for (int i = 0; i <= s1.length(); i++) {
             for (int j = 0; j <= s2.length(); j++) {
@@ -74,10 +75,13 @@ public class DeletionDistance {
         }
         return s1.length() + s2.length() - 2 * dp[s1.length()][s2.length()];
     }
+
     public static void main(String[] args) {
         System.out.println(minDistance("dog", "frog"));//3
         System.out.println(minDistance("some", "some"));//0
         System.out.println(minDistance("some", "thing"));//9
+        System.out.println(minDistanceMemo("some", "thing"));//9
+        System.out.println(minDistanceDP("some", "thing"));//9
         System.out.println(minDistance("", ""));//0
     }
 }
