@@ -36,6 +36,67 @@ import java.util.Queue;
  * Use bit masking to generate all the combinations.
  */
 public class Day13 {
+    static class CombinationIterator {
+        private Queue<String> queue;
+        public CombinationIterator(String characters, int combinationLength) {
+            this.queue = new LinkedList<>();
+            generateCombination(characters, 0, "", combinationLength, queue);
+        }
+
+        private void generateCombination(String characters, int start, String soFar, int length,
+                                         Queue<String> queue) {
+            if(length == 0){
+                queue.add(soFar);
+                return;
+            }
+            for(int i = start; i < characters.length(); i++) {
+                generateCombination(characters, i + 1, soFar + characters.charAt(i), start - 1, queue);
+            }
+        }
+
+        public String next() {
+            return queue.poll();
+        }
+
+        public boolean hasNext() {
+            return !queue.isEmpty();
+        }
+    }
+
+    class CombinationIterator2 {
+
+        Queue<String> queue;
+
+        public CombinationIterator2(String characters, int combinationLength) {
+            queue = new LinkedList();
+            combinations(characters, 0, "", combinationLength, queue);
+        }
+
+        public void combinations(String characters, int start, String soFar, int k, Queue<String> queue) {
+            if (k == 0) {
+                queue.add(soFar);
+                return;
+            }
+
+            for(int i = start; i < characters.length(); i++) {
+                combinations(characters, i + 1, soFar + characters.charAt(i), k - 1, queue);
+            }
+        }
+
+        public String next() {
+            return queue.poll();
+        }
+
+        public boolean hasNext() {
+            return !queue.isEmpty();
+        }
+    }
+
+    public static void main(String[] args) {
+        CombinationIterator iterator = new CombinationIterator("abc", 2);
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
 
     }
 
