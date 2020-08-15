@@ -100,4 +100,81 @@ public class Day13 {
 
     }
 
+    class CombinationIterator10 {
+        private String chars;
+        private int[] pos;
+        private boolean hasNext;
+
+        public CombinationIterator10(String characters, int combinationLength) {
+            hasNext = true;
+            chars = characters;
+            pos = new int[combinationLength];
+            for(int i = 0; i < combinationLength; i++) {
+                pos[i] = i;
+            }
+        }
+
+        public String next() {
+            StringBuilder b = new StringBuilder();
+            for(int i = 0; i < pos.length; i++) {
+                b.append(chars.charAt(pos[i]));
+            }
+
+            int n = chars.length();
+            hasNext = false;
+            for(int i = pos.length - 1; i >= 0; i--) {
+                if(n - pos[i] > pos.length - i) {
+                    pos[i]++;
+                    for(int j = i+1; j < pos.length; j++) {
+                        pos[j] = pos[j-1]+1;
+                    }
+                    hasNext =  true;
+                    break;
+                }
+            }
+
+            return b.toString();
+        }
+
+        public boolean hasNext() {
+            return hasNext;
+        }
+    }
+
+    class CombinationIterator9 {
+        char[] cur, dic;
+        boolean hasNext;
+        int n;
+        public CombinationIterator9(String characters, int L) {
+            cur = characters.substring(0, L).toCharArray();
+            dic = characters.toCharArray();
+            n = dic.length;
+            hasNext = true;
+        }
+
+        public String next() {
+            if(!hasNext) return "";
+            String res = new String(cur);
+            int L = cur.length;
+            int i = cur.length - 1, j = dic.length - 1;
+            while(i >= 0 && cur[i] == dic[j]){
+                i--;
+                j--;
+            }
+            if(i == -1){
+                hasNext = false;
+            }else{
+                int index = String.valueOf(dic).indexOf(cur[i]);
+                for( int k = i; k < L; k++) {
+                    cur[k] = dic[++index];
+                }
+            }
+            return res;
+        }
+
+        public boolean hasNext() {
+            return hasNext;
+        }
+    }
+
 }
