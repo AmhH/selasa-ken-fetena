@@ -23,5 +23,25 @@ package com.example.leet.august.week2;
  */
 public class Day14 {
 
+    public static int longestPalindrome(String s) {
+        int[] map = new int[58];
+        for(char c : s.toCharArray()){
+            map[c - 'A']++;
+        }
+        int oddCount = 0;
+        for(int i : map){
+            if(i % 2 != 0)
+                oddCount++;
 
+        }
+        int odd = oddCount > 0 ? 1 : 0;
+        return s.length() - oddCount + odd;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(longestPalindrome("abccccdd"));
+        System.out.println(longestPalindrome("abccccddzz"));
+        System.out.println(longestPalindrome("abbdccccddzz"));
+        System.out.println(longestPalindrome("bb"));
+    }
 }
