@@ -1,5 +1,7 @@
 package com.example.leet.august.week3;
 
+import java.util.Arrays;
+
 /**
  * Distribute Candies to People
  * We distribute some number of candies, to a row of n = num_people people in the following way:
@@ -15,8 +17,6 @@ package com.example.leet.august.week3;
  * one more than the previous gift).
  *
  * Return an array (of length num_people and sum candies) that represents the final distribution of candies.
- *
- *
  *
  * Example 1:
  *
@@ -46,5 +46,51 @@ package com.example.leet.august.week3;
  * Give candy to everyone each "turn" first [until you can't], then give candy to one person per turn.
  */
 public class Day17 {
+    public static int[] distributeCandies(int candies, int num_people) {
+        int[] res = new int[num_people];
+        for (int i = 0; candies > 0; ++i) {
+            res[i % num_people] += Math.min(candies, i + 1);
+            candies -= i + 1;
+        }
+        return res;
+    }
 
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(distributeCandies(7, 4)));
+        System.out.println(Arrays.toString(distributeCandies(10, 3)));
+    }
+
+    public static int[] distributeCandies2(int candies, int n) {
+        int[] answer = new int[n];
+        long num_people = n;
+        if(candies == 0) return answer;
+        int number = binarySearch(0, Math.min(50000, candies), candies) -1;
+        int fullFills =(int) number/n;
+        for(int i=1;i<=num_people;i++){
+            answer[i-1] = (int) (fullFills*i + (int) ((((fullFills -1) * 1l*fullFills)*num_people)/2));
+        }
+        int current = (int) (fullFills*num_people + 1l);
+        int candiesLeft = candies - (int) ((current-1) * current)/2;
+        for(int i=1;i<=num_people;i++){
+            int candiesToAdd = Math.min(current, candiesLeft);
+            answer[i-1] = (int) answer[i-1] + candiesToAdd;
+            candiesLeft -= candiesToAdd;
+            current++;
+        }
+        System.out.println(candiesLeft);
+        return answer;
+    }
+
+    static int binarySearch(int start, int end, int target){
+        while(start < end){
+            int mid = (start+end)/2;
+            if((1l*mid*(mid+1l))/2l >= target){
+                end = mid;
+            }
+            else{
+                start = mid +1;
+            }
+        }
+        return start;
+    }
 }
