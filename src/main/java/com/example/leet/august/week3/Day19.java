@@ -36,7 +36,37 @@ package com.example.leet.august.week3;
  */
 public class Day19 {
 
-    public String toGoatLatin(String S) {
+    public static String toGoatLatin(String S) {
+        if(S == null || S.isBlank())
+            return S;
+        int index = 0;
+        int wordCount = 1;
+        String vowels = "AEIOUaeiou";
+        StringBuilder builder = new StringBuilder();
 
+        while (index >= 0 && index < S.length()){
+            if (0 != index)
+                builder.append(" ");
+            char c = S.charAt(index);
+            int nextIndex = S.indexOf(" ", index);
+            nextIndex = nextIndex == -1 ? S.length() : nextIndex;
+            boolean isVowel = vowels.indexOf(c) != -1;
+            String word = S.substring(index, nextIndex);
+            if(isVowel){
+                builder.append(word);
+            }else {
+                builder.append(word.substring(1)).append(c);
+            }
+            builder.append("ma").append("a".repeat(wordCount));
+            wordCount++;
+            index = nextIndex + 1;
+        }
+
+        return builder.toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(toGoatLatin("I speak Goat Latin"));
+        System.out.println(toGoatLatin("The quick brown fox jumped over the lazy dog"));
     }
 }
