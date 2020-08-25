@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A string S of lowercase English letters is given. We want to partition this string into as many parts as possible so
+ * that each letter appears in at most one part, and return a list of integers representing the size of these parts.
+ */
 public class PartitionString {
     public static List<Integer> partitionString(String str){
         List<Integer> list = new ArrayList<>();
