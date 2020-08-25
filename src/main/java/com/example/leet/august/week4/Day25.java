@@ -48,4 +48,32 @@ package com.example.leet.august.week4;
  */
 public class Day25 {
 
+    public static int minCostTickets(int[] days, int[] costs) {
+        int length = days.length;
+        int[] dp = new int[length + 1];
+        for (int i = 0; i < length; i++) {
+            dp[i] = 365 * costs[0];
+        }
+
+        for (int i = length - 1 ; i >= 0; i--) {
+            int d7 = i;
+            int d30 = i;
+            while (d7 < length && days[d7] < days[i] + 7){
+                d7++;
+            }
+
+            while (d30 < length && days[d30] < days[i] + 30){
+                d30++;
+            }
+
+            dp[i] = Math.min(costs[0] + dp[i + 1], Math.min(costs[1] + dp[d7], costs[2] + dp[d30]));
+        }
+
+        return dp[0];
+    }
+
+    public static void main(String[] args) {
+        System.out.println(minCostTickets(new int[]{1,4,6,7,8,20}, new int[]{2, 7, 15}));//11
+        System.out.println(minCostTickets(new int[]{1,2,3,4,5,6,7,8,9,10,30,31}, new int[]{2, 7, 15}));//17
+    }
 }
