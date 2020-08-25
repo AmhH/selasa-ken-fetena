@@ -72,8 +72,32 @@ public class Day25 {
         return dp[0];
     }
 
+    public  static int minCostTickets1(int[] days, int[] costs) {
+        //MG
+        //dp[i]: min cost until day i
+        int[] dp = new int[days[days.length - 1] + 1];
+        dp[0] = 0;
+        int index = 0;
+        for (int i = 1; i < dp.length; i++) {
+            if (days[index] == i) {
+                //buy month
+                int month = dp[Math.max(0, i - 30)] + costs[2];
+                //buy week
+                int week = dp[Math.max(0, i - 7)] + costs[1];
+                //buy day
+                int day = dp[i - 1] + costs[0];
+
+                dp[i] = Math.min(day, Math.min(week, month));
+                index++;
+            }else {
+                dp[i] = dp[i-1];
+            }
+        }
+        return dp[dp.length - 1];
+    }
+
     public static void main(String[] args) {
         System.out.println(minCostTickets(new int[]{1,4,6,7,8,20}, new int[]{2, 7, 15}));//11
-        System.out.println(minCostTickets(new int[]{1,2,3,4,5,6,7,8,9,10,30,31}, new int[]{2, 7, 15}));//17
+        System.out.println(minCostTickets1(new int[]{1,2,3,4,5,6,7,8,9,10,30,31}, new int[]{2, 7, 15}));//17
     }
 }
