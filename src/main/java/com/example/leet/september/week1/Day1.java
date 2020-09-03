@@ -107,8 +107,8 @@ public class Day1 {
             int sd = hd == 2 ? 3 : 9;
 
             boolean secondDigSet = false;
-            outersd: for (int secondDig = sd; secondDig >= 0; secondDig--) {
-
+            outersd:
+            for (int secondDig = sd; secondDig >= 0; secondDig--) {
                 for (int i = 0; i < A.length; i++) {
                     if (A[i] == secondDig) {
 
@@ -128,8 +128,8 @@ public class Day1 {
             // Start by searching for down from 5
 
             boolean firstMinSet = false;
-            outermin: for (int firstMin = 5; firstMin >= 0; firstMin--) {
-
+            outermin:
+            for (int firstMin = 5; firstMin >= 0; firstMin--) {
                 for (int i = 0; i < A.length; i++) {
                     if (A[i] == firstMin) {
 
