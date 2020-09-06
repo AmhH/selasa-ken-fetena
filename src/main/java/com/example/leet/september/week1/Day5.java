@@ -1,5 +1,10 @@
 package com.example.leet.september.week1;
 
+import com.example.leet.util.TreeNode;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * All Elements in Two Binary Search Trees
  * Given two binary search trees root1 and root2.
@@ -37,6 +42,46 @@ package com.example.leet.september.week1;
  * Merge the two trees in one list and sort it.
  */
 public class Day5 {
+    public static List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
+        List<Integer> l1 = new ArrayList<>();
+        List<Integer> l2 = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
+        inOrderTraversal(root1, l1);
+        inOrderTraversal(root2, l2);
+        int index1 = 0;
+        int index2 = 0;
+        while(index1 < l1.size() || index2 < l2.size()){
+            if(index2 == l2.size() || index1 < l1.size() && l1.get(index1) <= l2.get(index2)){
+                result.add(l1.get(index1));
+                index1++;
+            }else if (index2 < l2.size()){
+                result.add(l2.get(index2));
+                index2++;
+            }
+        }
 
+        return result;
+    }
+
+    private static void inOrderTraversal(TreeNode root, List<Integer> list) {
+        if(null == root)
+            return;
+        inOrderTraversal(root.left, list);
+        list.add(root.val);
+        inOrderTraversal(root.right, list);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getAllElements(TreeNode.createTreeFromArray(new Integer[]{2,1,4}),
+                TreeNode.createTreeFromArray(new Integer[]{1,0,3})));
+        System.out.println(getAllElements(TreeNode.createTreeFromArray(new Integer[]{0,-10,10}),
+                TreeNode.createTreeFromArray(new Integer[]{5,1,7,0,2})));
+        System.out.println(getAllElements(TreeNode.createTreeFromArray(new Integer[]{}),
+                TreeNode.createTreeFromArray(new Integer[]{5,1,7,0,2})));
+        System.out.println(getAllElements(TreeNode.createTreeFromArray(new Integer[]{0,-10,10}),
+                TreeNode.createTreeFromArray(new Integer[]{})));
+        System.out.println(getAllElements(TreeNode.createTreeFromArray(new Integer[]{1,null,8}),
+                TreeNode.createTreeFromArray(new Integer[]{8, 1})));
+    }
 
 }
