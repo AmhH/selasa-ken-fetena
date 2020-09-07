@@ -7,6 +7,7 @@ import java.util.List;
  * Generate all permutations of a given array. Return a list of all permutations
  *
  * E.g.  a = [1, 2, 3] => [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3, 1, 2], [3,2,1]]
+ * https://leetcode.com/problems/permutations/discuss/18239/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partioning)
  */
 public class Permutation {
 

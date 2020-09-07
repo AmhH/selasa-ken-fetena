@@ -29,11 +29,67 @@ package com.example.leet.september.week1;
  * 0 <= A[i][j], B[i][j] <= 1
  */
 public class Day6 {
-    public static int largestOverlap(int[][] A, int[][] B) {
-        return 0;//TODO
+    protected int shiftAndCount(int x, int y, int[][] M, int[][] R) {
+        int count = 0;
+        int r = 0;
+        // count the cells of ones in the overlapping zone.
+        for (int row = y; row < M.length; ++row) {
+            int c = 0;
+            for (int col = x; col < M.length; ++col) {
+                if (M[row][col] == 1 && M[row][col] == R[r][c])
+                    count += 1;
+                c += 1;
+            }
+            r += 1;
+        }
+        return count;
+    }
+
+    public int largestOverlap(int[][] A, int[][] B) {
+        int maxOverlaps = 0;
+
+        for (int y = 0; y < A.length; ++y)
+            for (int x = 0; x < A.length; ++x) {
+                // move one of the matrice up and left and vice versa.
+                // (equivalent to move the other matrix down and right)
+                maxOverlaps = Math.max(maxOverlaps, shiftAndCount(x, y, A, B));
+                maxOverlaps = Math.max(maxOverlaps, shiftAndCount(x, y, B, A));
+            }
+
+        return maxOverlaps;
     }
 
     public static void main(String[] args) {
         System.out.println();
+    }
+
+    public int largestOverlap1(int[][] a, int[][] b) {
+        return Math.max(find(a, b, 0, 0, new boolean[a.length][a[0].length]), find(b, a, 0, 0, new boolean[a.length][a[0].length]));
+    }
+
+    private int find(int[][] a, int[][] b, int posi, int posj, boolean[][] mem) {
+        if(posi < 0 || posi >= a.length || posj < 0 || posj >= a[0].length) {
+            return 0;
+        }
+        if(mem[posi][posj]) {
+            return 0;
+        }
+        mem[posi][posj] = true;
+        int max = count(a, b, posi, posj);
+        max = Math.max(max, find(a, b, posi + 1, posj, mem));
+        max = Math.max(max, find(a, b, posi, posj + 1, mem));
+        return max;
+    }
+
+    private int count(int[][] a, int[][] b, int posi, int posj) {
+        int cnt = 0;
+        for(int i = posi; i < a.length; i++) {
+            for(int j = posj; j < a[i].length; j++) {
+                //if(a[i][j] + b[i - posi][j - posj] == 2) {
+                cnt += (a[i][j] + b[i - posi][j - posj]) >> 1;
+                //}
+            }
+        }
+        return cnt;
     }
 }
