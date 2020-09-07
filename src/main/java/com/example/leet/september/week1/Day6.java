@@ -29,4 +29,11 @@ package com.example.leet.september.week1;
  * 0 <= A[i][j], B[i][j] <= 1
  */
 public class Day6 {
+    public static int largestOverlap(int[][] A, int[][] B) {
+
+    }
+
+    public static void main(String[] args) {
+        System.out.println();
+    }
 }
