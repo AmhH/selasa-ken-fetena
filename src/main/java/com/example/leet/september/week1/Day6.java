@@ -29,7 +29,7 @@ package com.example.leet.september.week1;
  * 0 <= A[i][j], B[i][j] <= 1
  */
 public class Day6 {
-    protected int shiftAndCount(int x, int y, int[][] M, int[][] R) {
+    protected static int shiftAndCount(int x, int y, int[][] M, int[][] R) {
         int count = 0;
         int r = 0;
         // count the cells of ones in the overlapping zone.
@@ -45,7 +45,7 @@ public class Day6 {
         return count;
     }
 
-    public int largestOverlap(int[][] A, int[][] B) {
+    public static int largestOverlap(int[][] A, int[][] B) {
         int maxOverlaps = 0;
 
         for (int y = 0; y < A.length; ++y)
@@ -60,7 +60,13 @@ public class Day6 {
     }
 
     public static void main(String[] args) {
-        System.out.println();
+        int[][] a = {{1,1,0},
+                    {0,1,0},
+                    {0,1,0}};
+        int[][] b = {{0,0,0},
+                    {0,1,1},
+                    {0,0,1}};
+        System.out.println(largestOverlap(a, b));
     }
 
     public int largestOverlap1(int[][] a, int[][] b) {
