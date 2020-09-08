@@ -1,5 +1,12 @@
 package com.example.leet.september.week2;
 
+import com.example.leet.util.TreeNode;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
 /**
  * Sum of Root To Leaf Binary Numbers
  * Given a binary tree, each node has value 0 or 1.  Each root-to-leaf path represents a binary number starting with
@@ -27,5 +34,46 @@ package com.example.leet.september.week2;
  */
 public class Day8 {
 
+    public static int sumRootToLeaf(TreeNode root) {
+        List<String> numbers = new LinkedList<>();
+        collectBinary(root, new StringBuilder(), numbers);
+        int sum = 0;
+        for (String num : numbers)
+            sum += base2To10(num);
+        return sum;
+    }
 
+    private static int base2To10(String num) {
+        int baseTen = 0;
+        int length = num.length();
+        for (int i = 0; i < length; i++) {
+            baseTen = baseTen + Character.getNumericValue(num.charAt(i)) * (int)Math.pow(2, length - i - 1);
+        }
+        return baseTen;
+    }
+
+    private static void collectBinary(TreeNode root, StringBuilder current, List<String> numbers) {
+        current.append(root.val);
+        if(null == root.left && null == root.right){
+            numbers.add(current.toString());
+            current.deleteCharAt(current.length() - 1);
+            return;
+        }
+        if(null != root.left){
+            collectBinary(root.left, current, numbers);
+        }
+        if(null != root.right){
+            collectBinary(root.right, current, numbers);
+        }
+        current.deleteCharAt(current.length() - 1);
+    }
+
+    public static void main(String[] args) {
+        TreeNode root = TreeNode.createTreeFromArray(new Integer[]{1, 0, 1, 0, 1, 0, 1});
+        TreeNode root2 = TreeNode.createTreeFromArray(new Integer[]{1, 1});
+        TreeNode root3 = TreeNode.createTreeFromArray(new Integer[]{0,1,1});
+        System.out.println(sumRootToLeaf(root));//22
+        System.out.println(sumRootToLeaf(root2));//3
+        System.out.println(sumRootToLeaf(root3));//2
+    }
 }
