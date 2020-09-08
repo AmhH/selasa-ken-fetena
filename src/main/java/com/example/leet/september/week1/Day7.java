@@ -1,5 +1,8 @@
 package com.example.leet.september.week1;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Word Pattern
  * Given a pattern and a string str, find if str follows the same pattern.
@@ -28,11 +31,37 @@ package com.example.leet.september.week1;
  * by a single space.
  */
 public class Day7 {
-    public boolean wordPattern(String pattern, String str) {
+    public static boolean wordPattern(String pattern, String str) {
+        String[] words = str.split(" ");
+        Map<Object, Integer> map = new HashMap<>();
+        if(words.length != pattern.length())
+            return false;
+        for (int i = 0; i < words.length; i++) {
+            char c = pattern.charAt(i);
+            String word = words[i];
+            if(!map.containsKey(c))
+                map.put(c, i);
+            if(!map.containsKey(word))
+                map.put(word, i);
+            if(!map.get(c).equals(map.get(word)))
+                return false;
+        }
 
+        return true;
     }
 
     public static void main(String[] args) {
+       /* System.out.println(wordPattern("abba", "dog cat cat dog"));
+        System.out.println(wordPattern("abba", "dog cat cat fish"));
+        System.out.println(wordPattern("aaaa", "dog cat cat dog"));
+        System.out.println(wordPattern("abba", "dog dog dog dog"));*/
+        String pattern =
+                "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccdd";
+        String str = "s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s" +
+                " s s s s s " +
+                "s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s " +
+                "s s s s s s s s s s s s s s s s s s s s s s s s t t";
 
+        System.out.println(wordPattern(pattern, str));
     }
 }
