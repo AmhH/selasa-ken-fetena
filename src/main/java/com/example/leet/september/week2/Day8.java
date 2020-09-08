@@ -76,4 +76,23 @@ public class Day8 {
         System.out.println(sumRootToLeaf(root2));//3
         System.out.println(sumRootToLeaf(root3));//2
     }
+
+    public int sumRootToLeafUtil(TreeNode root, int val) {
+        if(root == null)
+            return 0;
+
+        val = val * 2 + root.val;
+
+        //if leaf node
+        if(root.left == null && root.right == null) {
+            return val;
+        }
+
+        return sumRootToLeafUtil(root.left, val)
+                + sumRootToLeafUtil(root.right, val);
+    }
+
+    public int sumRootToLeaf1(TreeNode root) {
+        return sumRootToLeafUtil(root, 0);
+    }
 }
