@@ -49,5 +49,89 @@ package com.example.leet.september.week2;
  * Version strings do not start or end with dots, and they will not be two consecutive dots.
  */
 public class Day9 {
+    public static int compareVersion(String version1, String version2) {
+        String[] v1 = version1.split("\\.");
+        String[] v2 = version2.split("\\.");
+        int minSize = Math.min(v1.length, v2.length);
+        int index = 0;
+        while (index < minSize){
+            int vr1 = Integer.parseInt(v1[index]);
+            int vr2 = Integer.parseInt(v2[index]);
+            index++;
+            if(vr1 < vr2)
+                return -1;
+            if(vr1 > vr2)
+                return 1;
+        }
+        if(v1.length != v2.length){
+            if(v1.length > v2.length)
+                return checkVersion(v1, index, 1);
+            return checkVersion(v2, index, -1);
+        }
 
+        return 0;
+    }
+
+    private static int checkVersion(String[] v, int index, int multi) {
+        for (int i = index; i < v.length; i++) {
+            if(Integer.parseInt(v[i]) != 0)
+                return multi * 1;
+        }
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(compareVersion("0.1", "1.1"));//-1
+        System.out.println(compareVersion("1.0.1", "1"));//1
+        System.out.println(compareVersion("7.5.2.4", "7.5.3"));//-1
+        System.out.println(compareVersion("1.01", "1.001"));//0
+        System.out.println(compareVersion("1.0", "1.0.0"));//0
+        System.out.println(compareVersion("1", "1.1"));//-1
+    }
+
+    class Version{
+        String str;
+        int pointer;
+        Version(String str){
+            this.str = str;
+            this.pointer = 0;
+        }
+
+        boolean hasNext(){
+            return pointer < str.length();
+        }
+
+        int getNext(){
+            StringBuilder sb = new StringBuilder();
+            while ((pointer < str.length()) && (str.charAt(pointer) != '.')){
+                sb.append(str.charAt(pointer));
+                pointer++;
+            }
+            pointer ++;
+            return Integer.parseInt(sb.toString());
+        }
+    }
+    class Solution {
+        public int compareVersion(String version1, String version2) {
+            Version v1 = new Version(version1);
+            Version v2 = new Version(version2);
+            while ((v1.hasNext()) && (v2.hasNext())){
+                int next1 = v1.getNext();
+                int next2 = v2.getNext();
+                if (next1 > next2)
+                    return 1;
+                else if (next1 < next2)
+                    return -1;
+            }
+            while (v1.hasNext()){
+                if (v1.getNext() != 0)
+                    return 1;
+            }
+            while (v2.hasNext()){
+                if (v2.getNext() != 0)
+                    return -1;
+            }
+            return 0;
+        }
+    }
 }
