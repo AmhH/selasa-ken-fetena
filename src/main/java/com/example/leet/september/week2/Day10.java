@@ -47,6 +47,43 @@ public class Day10 {
 
     public static void main(String[] args) {
         System.out.println(getHint("1807", "7810"));//"1A3B"
-        System.out.println(getHint("1123", "0111"));//"1A1B"
+        System.out.println(getHint1("1123", "0111"));//"1A1B"
+    }
+
+    public static String getHint1(String secret, String guess) {
+
+        int c = 0, b = 0;
+        int[] map = new int[10];
+
+        for(int i=0;i<secret.length();i++){
+            int ch1 = secret.charAt(i)-'0';
+            map[ch1]++;
+        }
+
+        for(int i=0;i<secret.length();i++){
+            int ch1 = secret.charAt(i)-'0';
+            int ch2 = guess.charAt(i)-'0';
+            if(ch1 == ch2){
+                b++;
+                map[ch2]--;
+            }
+        }
+
+        for(int i=0;i<secret.length();i++){
+            int ch1 = secret.charAt(i)-'0';
+            int ch2 = guess.charAt(i)-'0';
+            if(ch1 != ch2 && map[ch2]>0){
+                c++;
+                map[ch2]--;
+            }
+        }
+
+        StringBuilder sb = new StringBuilder("");
+        sb.append(b);
+        sb.append("A");
+        sb.append(c);
+        sb.append("B");
+
+        return sb.toString();
     }
 }
