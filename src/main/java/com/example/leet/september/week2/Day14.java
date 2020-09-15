@@ -1,5 +1,7 @@
 package com.example.leet.september.week2;
 
+import java.util.Arrays;
+
 /**
  * House Robber
  * You are a professional robber planning to rob houses along a street. Each house has a certain amount of money
@@ -31,4 +33,45 @@ package com.example.leet.september.week2;
  * 0 <= nums[i] <= 400
  */
 public class Day14 {
+    public static int rob(int[] nums) {
+        int[] memo = new int[nums.length];
+        Arrays.fill(memo, -1);
+        return rob(nums, 0, memo);
+    }
+
+    private static int rob(int[] nums, int index, int[] memo) {
+        if(index >= nums.length)
+            return 0;
+        if(memo[index] > -1)
+            return memo[index];
+        int with = nums[index] + rob(nums, index+2, memo);
+        int withOut = rob(nums, index+1, memo);
+        int max = Math.max(with, withOut);
+        memo[index] = max;
+        return max;
+    }
+
+    public static int rob0(int[] nums) {
+        if(nums.length == 0) return 0;
+        if(nums.length == 1) return nums[0];
+        if(nums.length == 2) return Math.max(nums[0], nums[1]);
+
+        int pMax = 0;
+        int cMax = 0;
+        for(int n = 0; n < nums.length; n++){
+            int temp = cMax;
+            cMax = Math.max(pMax + nums[n], cMax);
+            pMax = temp;
+        }
+
+        return cMax;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(rob(new int[]{1,2,3,1}));//4
+        System.out.println(rob(new int[]{2,7,9,3,1}));//12
+        System.out.println(rob(new int[]{2,7,9,8,1}));//15
+        System.out.println(rob(new int[]{2,1,1,2}));//4
+        System.out.println(rob0(new int[]{2,1,1,2}));//4
+    }
 }
