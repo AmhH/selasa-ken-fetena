@@ -23,5 +23,20 @@ package com.example.leet.september.week3;
  */
 public class Day18 {
 
+    public static int maxProfit(int[] prices) {
+        int minprice = Integer.MAX_VALUE;
+        int maxprofit = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minprice)
+                minprice = prices[i];
+            else if (prices[i] - minprice > maxprofit)
+                maxprofit = prices[i] - minprice;
+        }
+        return maxprofit;
+    }
 
+    public static void main(String[] args) {
+        System.out.println(maxProfit(new int[]{7,1,5,3,6,4}));//5
+        System.out.println(maxProfit(new int[]{7,6,4,3,1}));//0
+    }
 }
