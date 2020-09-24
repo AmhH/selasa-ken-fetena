@@ -50,6 +50,50 @@ package com.example.leet.september.week4;
 public class Day23 {
 
     public static int canCompleteCircuit(int[] gas, int[] cost) {
+        for (int i = 0; i < gas.length; i++){
+            int result = canCompleteCircuit(gas, cost, i, 0, 0);
+            if(result != -1){
+                return i;
+            }
+        }
+        return -1;
+    }
 
+    private static int canCompleteCircuit(int[] gas, int[] cost, int index, int processed, int balance) {
+        int newBalance = balance + gas[index] - cost[index];
+        if(newBalance < 0)
+            return -1;
+        if(processed == gas.length-1)
+            return newBalance;
+        int nextIndex = index+1 < gas.length ? index + 1 : 0;
+
+        return canCompleteCircuit(gas, cost, nextIndex, ++processed, newBalance);
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(canCompleteCircuit(new int[]{1,2,3,4,5}, new int[]{3,4,5,1,2}));//3
+        System.out.println(canCompleteCircuit(new int[]{2,3,4}, new int[]{3,4,3}));//-1
+        System.out.println(canCompleteCircuit0(new int[]{2,3,4}, new int[]{3,4,3}));//-1
+    }
+
+    public static int canCompleteCircuit0(int[] gas, int[] cost) {
+        int sumGas = 0;
+        int sumCost = 0;
+        int tank = 0;
+        int start = 0;
+
+        for(int i = 0; i < gas.length; i++) {
+            sumGas += gas[i];
+            sumCost += cost[i];
+
+            tank += gas[i] - cost[i];
+            if(tank < 0) {
+                start = i + 1;
+                tank = 0;
+            }
+        }
+
+        return sumGas < sumCost ? -1 : start;
     }
 }
