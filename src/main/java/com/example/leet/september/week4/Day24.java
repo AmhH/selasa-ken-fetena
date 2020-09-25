@@ -38,10 +38,10 @@ public class Day24 {
 
     public static void main(String[] args) {
         System.out.println(findTheDifference("abcd", "abcde"));
-        System.out.println(findTheDifference1("a", "aa"));
+        System.out.println(findTheDifference0("a", "aa"));
     }
 
-    public static char findTheDifference1(String s, String t) {
+    public static char findTheDifference0(String s, String t) {
         int sumS = 0, sumT = 0;
         char[] arrS = s.toCharArray();
         char[] arrT = t.toCharArray();
