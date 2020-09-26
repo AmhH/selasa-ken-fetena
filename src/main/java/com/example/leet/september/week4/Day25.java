@@ -1,5 +1,7 @@
 package com.example.leet.september.week4;
 
+import java.util.Arrays;
+
 /**
  * Largest Number
  * Given a list of non negative integers, arrange them such that they form the largest number.
@@ -17,7 +19,23 @@ package com.example.leet.september.week4;
 public class Day25 {
 
     public static String largestNumber(int[] nums) {
+        String[] strArray = new String[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            strArray[i] = String.valueOf(nums[i]);
+        }
 
+        Arrays.sort(strArray, (a, b) -> (b+a).compareTo(a+b));
+
+        if (strArray[0].equals("0")) {
+            return "0";
+        }
+
+        String largest = new String();
+        for (String numAsStr : strArray) {
+            largest += numAsStr;
+        }
+
+        return largest;
     }
 
     public static void main(String[] args) {
