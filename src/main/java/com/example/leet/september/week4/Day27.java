@@ -1,8 +1,6 @@
 package com.example.leet.september.week4;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Evaluate Division
@@ -51,23 +49,68 @@ import java.util.List;
  */
 public class Day27 {
 
+     static class Node{
+        String key;
+        double val;
+
+         public Node(String key, double val) {
+             this.key = key;
+             this.val = val;
+         }
+     }
     public static double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
+        Map<String, List<Node>> graph = buildGraph(equations, values);
+        int size = queries.size();
+        double[] result = new double[size];
+        for (int i = 0; i < size; i++) {
+            result[i] = dfs(queries.get(i).get(0), queries.get(i).get(1), new HashSet<>(), graph);
+        }
+        return result;
+    }
 
+    private static double dfs(String src, String dst, Set<Object> visited, Map<String, List<Node>> graph) {
+        if(!(graph.containsKey(src) && graph.containsKey(dst)))
+            return -1.0;
+        if(src.equals(dst))
+            return 1.0;
 
+        visited.add(src);
+        for(Node node : graph.get(src)) {
+            if(!visited.contains(node.key)) {
+                double ans = dfs(node.key, dst, visited, graph);
+                if(ans != -1.0)
+                    return ans * node.val;
+            }
+        }
+
+        return -1.0;
+    }
+
+    private static Map<String, List<Node>> buildGraph(List<List<String>> equations, double[] values) {
+        Map<String, List<Node>> graph = new HashMap();
+        for (int i = 0; i < values.length; i++) {
+            String src = equations.get(i).get(0);
+            String dest = equations.get(i).get(1);
+            graph.computeIfAbsent(src, k -> new ArrayList()).add(new Node(dest, values[i]));
+            graph.computeIfAbsent(dest, k -> new ArrayList()).add(new Node(src, 1 / values[i]));
+        }
+        return graph;
     }
 
     public static void main(String[] args) {
-        System.out.println(calcEquation(Arrays.asList(Arrays.asList("a","b"), Arrays.asList("b","c")),
+        System.out.println(Arrays.toString(calcEquation(Arrays.asList(Arrays.asList("a","b"), Arrays.asList("b","c")),
                 new double[]{2.0, 3.0}, Arrays.asList(Arrays.asList("a","c"),Arrays.asList("b","a"),
-                        Arrays.asList("a","e"),Arrays.asList("a","a"), Arrays.asList("x","x"))));//Output: [6.00000,0.50000,-1.00000,1.00000,-1.00000]
+                        Arrays.asList("a","e"),Arrays.asList("a","a"), Arrays.asList("x","x")))));//Output: [6.00000,
+        // 0.50000,-1.00000,1.00000,-1.00000]
 
-        System.out.println(calcEquation(Arrays.asList(Arrays.asList("a","b"),Arrays.asList("b","c"),Arrays.asList("bc","cd")),
+        System.out.println(Arrays.toString(calcEquation(Arrays.asList(Arrays.asList("a","b"),Arrays.asList("b","c"), Arrays.asList("bc","cd")),
                 new double[]{1.5,2.5,5.0}, Arrays.asList(Arrays.asList("a","c"),Arrays.asList("c","b"),Arrays.asList("bc","cd"),
-        Arrays.asList("cd", "bc"))));//[3.75000,0.40000,5.00000,0.20000]
+        Arrays.asList("cd", "bc")))));//[3.75000,0.40000,5.00000,0.20000]
 
-        System.out.println(calcEquation(Collections.singletonList(Arrays.asList("a","b")),
+        System.out.println(Arrays.toString(calcEquation(Collections.singletonList(Arrays.asList("a","b")),
                 new double[]{0.5},
-                Arrays.asList(Arrays.asList("a","b"),Arrays.asList("b","a"),Arrays.asList("a","c"),Arrays.asList("x", "y"))));
+                Arrays.asList(Arrays.asList("a","b"),Arrays.asList("b","a"),Arrays.asList("a","c"),Arrays.asList("x",
+                        "y")))));
         //[0.50000,2.00000,-1.00000,-1.00000]
     }
 }
