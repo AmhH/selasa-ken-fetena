@@ -24,5 +24,43 @@ package com.example.leet.september.week4;
  */
 public class Day28 {
 
+    public static int numSubarrayProductLessThanK(int[] nums, int k) {
+        if (k <= 1) return 0;
+        int product = 1;
+        int result = 0;
+        int l = 0;
+        for (int i = 0; i < nums.length; i++) {
+            product *= nums[i];
+            while (product >= k) {
+                product /= nums[l++];
+            }
+            result += i - l + 1;
+        }
+        return result;
+    }
 
+    public static int numSubarrayProductLessThanK1(int[] nums, int k) {
+        int res = 0;
+        int start = 0;
+        int prod = 1;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] >= k) {
+                start = i + 1;
+                prod = 1;
+            } else {
+                prod *= nums[i];
+                while (prod >= k ) {
+                    prod /= nums[start];
+                    start++;
+                }
+                res += i - start + 1;
+            }
+        }
+        return res;
+    }
+    public static void main(String[] args) {
+        System.out.println(numSubarrayProductLessThanK(new int[]{10, 5, 2, 6}, 100));//[5, 2, 6]
+        System.out.println(numSubarrayProductLessThanK1(new int[]{10, 5, 2, 6}, 100));//[5, 2, 6]
+    }
 }
