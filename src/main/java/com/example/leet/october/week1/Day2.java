@@ -1,5 +1,8 @@
 package com.example.leet.october.week1;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -48,7 +51,26 @@ import java.util.List;
 public class Day2 {
 
     public static List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> result = new LinkedList<>();
+        Arrays.sort(candidates);
+        backTrack(result, new LinkedList<>(), candidates, target, 0);
+        return result;
+    }
 
+    private static void backTrack(List<List<Integer>> result, List<Integer> temp, int[] candidates, int target,
+                                  int index) {
+        if(target == 0){
+            result.add(new LinkedList<>(temp));
+            return;
+        }
+
+        for (int i = index; i < candidates.length; i++) {
+            if(candidates[i] > target)
+                break;
+            temp.add(candidates[i]);
+            backTrack(result, temp, candidates, target - candidates[i], i);
+            temp.remove(temp.size() - 1);
+        }
     }
 
     public static void main(String[] args) {
