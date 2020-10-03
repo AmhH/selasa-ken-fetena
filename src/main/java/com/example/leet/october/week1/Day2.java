@@ -51,16 +51,16 @@ import java.util.List;
 public class Day2 {
 
     public static List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> result = new LinkedList<>();
+        List<List<Integer>> result = new ArrayList<>();
         Arrays.sort(candidates);
-        backTrack(result, new LinkedList<>(), candidates, target, 0);
+        backTrack(result, new ArrayList<>(), candidates, target, 0);
         return result;
     }
 
     private static void backTrack(List<List<Integer>> result, List<Integer> temp, int[] candidates, int target,
                                   int index) {
         if(target == 0){
-            result.add(new LinkedList<>(temp));
+            result.add(new ArrayList<>(temp));
             return;
         }
 
