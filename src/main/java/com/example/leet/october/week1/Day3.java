@@ -1,5 +1,9 @@
 package com.example.leet.october.week1;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *  K-diff Pairs in an Array
  * Given an array of integers nums and an integer k, return the number of unique k-diff pairs in the array.
@@ -10,7 +14,6 @@ package com.example.leet.october.week1;
  * i != j
  * a <= b
  * b - a == k
- *
  *
  * Example 1:
  *
@@ -45,7 +48,63 @@ package com.example.leet.october.week1;
  * 0 <= k <= 107
  */
 public class Day3 {
-    public int findPairs(int[] nums, int k) {
+    public static int findPairs(int[] nums, int k) {
+        Set<Integer> set = new HashSet<>();
+        Set<Integer> doubles = new HashSet<>();
+        int count = 0;
+        for (int n : nums){
+            if(set.contains(n)){
+                doubles.add(n);
+            }
+            set.add(n);
+        }
 
+        for (int n : set){
+            if(set.contains(n - k))
+                count++;
+        }
+
+        return k == 0 ? doubles.size() : count;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(findPairs(new int[]{3,1,4,1,5}, 2));//2
+        System.out.println(findPairs(new int[]{1,2,3,4,5}, 1));//4
+        System.out.println(findPairs(new int[]{1,3,1,5,4}, 0));//1
+        System.out.println(findPairs(new int[]{1,2,4,4,3,3,0,9,2,3}, 3));//2
+        System.out.println(findPairs(new int[]{-1,-2,-3}, 1));//2
+        System.out.println(findPairs(new int[]{1,1,1,1,1}, 0));//1
+    }
+
+    class Solution {
+        int numPairs = 0;
+
+        public int findPairs(int[] nums, int k) {
+            Arrays.sort(nums);
+            checkArray(nums, k);
+            return numPairs;
+        }
+
+        private void checkArray(int[] nums, int k) {
+            int i = 0;
+            int j = 0;
+
+            if (k < 0) {
+                return;
+            }
+
+            while(i<nums.length && j < nums.length){
+                if(i != j && nums[i]+k == nums[j]){
+                    numPairs++;
+                    while(j < nums.length && nums[i]+k == nums[j]) j++; //To eliminate duplicate
+                }
+                else if(nums[i] + k > nums[j]){
+                    j++;
+                }
+                else{
+                    i++;
+                }
+            }
+        }
     }
 }
