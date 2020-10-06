@@ -39,11 +39,13 @@ public class Day5 {
     public static int bitwiseComplement(int N) {
         if (N == 0) return 1;
         if (N == 1) return 0;
-        int x = 1;
+        int x = 1; // c = pow(2, x) – 1; c is the smallest number >= N
         while(x <= N){
-            x = x << 1;  // equialently written as x*=2;
+            x = x << 1;  // equivalently written as x*=2;
+            //c = c*2 + 1;  same as above
         }
         return N ^ (x-1);
+        //return c - N; // also ok  
     }
 
     public static void main(String[] args) {
