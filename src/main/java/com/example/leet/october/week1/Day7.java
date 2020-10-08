@@ -25,6 +25,24 @@ import com.example.leet.util.ListNode;
  */
 public class Day7 {
     public ListNode rotateRight(ListNode head, int k) {
+        if(null == head || k == 0){
+            return head;
+        }
+        ListNode node = head;
+        int length = 1;
+        while (null != node.next){
+            length++;
+            node = node.next;
+        }
 
+        k %= length;
+        node.next = head;
+        for (int i = 0; i < length - k; i++) {
+            node = node.next;
+        }
+        head = node.next;
+        node.next = null;
+
+        return head;
     }
 }
