@@ -1,5 +1,10 @@
 package com.example.leet.october.week2;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
 /**
  * Minimum Number of Arrows to Burst Balloons
  * There are some spherical balloons spread in two-dimensional space. For each balloon, provided input is the start
@@ -14,28 +19,26 @@ package com.example.leet.october.week2;
  * burst all balloons.
  *
  * Example 1:
- *
  * Input: points = [[10,16],[2,8],[1,6],[7,12]]
  * Output: 2
  * Explanation: One way is to shoot one arrow for example at x = 6 (bursting the balloons [2,8] and [1,6]) and
  * another arrow at x = 11 (bursting the other two balloons).
- * Example 2:
  *
+ * Example 2:
  * Input: points = [[1,2],[3,4],[5,6],[7,8]]
  * Output: 4
- * Example 3:
  *
+ * Example 3:
  * Input: points = [[1,2],[2,3],[3,4],[4,5]]
  * Output: 2
- * Example 4:
  *
+ * Example 4:
  * Input: points = [[1,2]]
  * Output: 1
- * Example 5:
  *
+ * Example 5:
  * Input: points = [[2,3],[2,3]]
  * Output: 1
- *
  *
  * Constraints:
  *
@@ -44,4 +47,31 @@ package com.example.leet.october.week2;
  * -231 <= xstart < xend <= 231 - 1
  */
 public class Day10 {
+
+    public static int findMinArrowShots(int[][] points) {
+        if (points == null || points.length == 0) {
+            return 0;
+        }
+        Arrays.sort(points, Comparator.comparingInt(a -> a[1]));
+
+        int arrowPos = points[0][1];
+        int arrowCnt = 1;
+        for (int i = 1; i < points.length; i++) {
+            if (points[i][0] <= arrowPos) {
+                continue;
+            }
+
+            arrowCnt++;
+            arrowPos = points[i][1];
+        }
+
+        return arrowCnt;
+    }
+    public static void main(String[] args) {
+        System.out.println(findMinArrowShots(new int[][]{{10,16},{2,8},{1,6},{7,12}}));//2
+        System.out.println(findMinArrowShots(new int[][]{{1,2},{3,4},{5,6},{7,8}}));//4
+        System.out.println(findMinArrowShots(new int[][]{{1,2},{2,3},{3,4},{4,5}}));//2
+        System.out.println(findMinArrowShots(new int[][]{{1,2}}));//1
+        System.out.println(findMinArrowShots(new int[][]{{2,3},{2,3}}));//1
+    }
 }
