@@ -37,10 +37,7 @@ public class Day17 {
             }
             counts.put(substr, counts.getOrDefault(substr, 0)+1);
         }
-
         return res;
-
-
     }
 
     public static void main(String[] args) {
@@ -67,7 +64,6 @@ public class Day17 {
         hashCodeMap[hashCode] = true;
         for (; i < chars.length; i++) {
             hashCode = ((hashCode << 2) & 0xFFFFF) + map[chars[i]];
-
 
             if (hashCodeMap[hashCode] && !added[hashCode]) {
                 ans.add(new String(chars,i-9,10));
