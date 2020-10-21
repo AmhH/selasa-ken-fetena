@@ -74,32 +74,32 @@ import java.util.*;
 public class Day20 {
 
     // Definition for a Node.
-    class Node {
+    public static class Node {
         public int val;
         public List<Node> neighbors;
 
         public Node() {
             val = 0;
-            neighbors = new ArrayList<Node>();
+            neighbors = new ArrayList<>();
         }
 
-        public Node(int _val) {
-            val = _val;
-            neighbors = new ArrayList<Node>();
+        public Node(int val) {
+            this.val = val;
+            this.neighbors = new ArrayList<>();
         }
 
-        public Node(int _val, ArrayList<Node> _neighbors) {
-            val = _val;
-            neighbors = _neighbors;
+        public Node(int val, ArrayList<Node> neighbors) {
+            this.val = val;
+            this.neighbors = neighbors;
         }
     }
 
     //BFS
     public Node cloneGraph(Node node) {
         if (node == null) return null;
-        Queue<Node> queue = new LinkedList<Node>();
+        Queue<Node> queue = new LinkedList<>();
         queue.add(node);
-        Map<Node, Node> map = new HashMap<Node, Node>();
+        Map<Node, Node> map = new HashMap<>();
         map.put(node, new Node(node.val));
         while (!queue.isEmpty()) {
             Node current = queue.poll();
