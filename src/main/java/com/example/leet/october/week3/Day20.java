@@ -94,5 +94,87 @@ public class Day20 {
         }
     }
 
+    //BFS
+    public Node cloneGraph(Node node) {
+        if (node == null) return null;
+        Queue<Node> queue = new LinkedList<Node>();
+        queue.add(node);
+        Map<Node, Node> map = new HashMap<Node, Node>();
+        map.put(node, new Node(node.val));
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+            for (Node neighbor : current.neighbors) {
+                if (!map.containsKey(neighbor)) {
+                    map.put(neighbor, new Node(neighbor.val));
+                    queue.add(neighbor);
+                }
+                map.get(current).neighbors.add(map.get(neighbor));
+            }
+        }
 
+        return map.get(node);
+    }
+
+    //DFS
+    class Solution {
+        private Map<Node, Node> map = new HashMap();
+        public Node cloneGraph(Node node) {
+            if(node == null)
+                return null;
+            if(map.containsKey(node))
+                return map.get(node);
+            Node root = new Node(node.val);
+            map.put(node, root);
+            for(Node ng : node.neighbors)
+                root.neighbors.add(cloneGraph(ng));
+            return root;
+        }
+    }
+
+    class SolutionOther {
+        public Node cloneGraph(Node node) {
+            if(node == null){
+                return null;
+            }
+            //Use bfs to get all graph nodes
+            List<Node> nodes = getNodes(node);
+            if(nodes.isEmpty()){
+                return new Node(node.val);
+            }
+
+            //Use a map to store original node and copy node
+            Map<Node, Node> map = new HashMap<>();
+            //copy node first
+            for(Node cur : nodes){
+                map.put(cur, new Node(cur.val));
+            }
+            //copy neighbors
+            for(Node cur : nodes){
+                Node newNode = map.get(cur);
+                for(Node neighbor : cur.neighbors){
+                    newNode.neighbors.add(map.get(neighbor));
+                }
+            }
+
+            return map.get(node);
+        }
+
+        private List<Node> getNodes(Node node){
+            Queue<Node> queue = new LinkedList<>();
+            Set<Node> set = new HashSet<>();
+            queue.offer(node);
+
+            while(!queue.isEmpty()){
+                Node cur = queue.poll();
+                for(Node neighbor : cur.neighbors){
+                    if(!set.contains(neighbor)){
+                        queue.offer(neighbor);
+                        set.add(neighbor);
+                    }
+                }
+            }
+
+            return new ArrayList<>(set);
+        }
+    }
 }
