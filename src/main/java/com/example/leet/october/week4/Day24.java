@@ -1,5 +1,7 @@
 package com.example.leet.october.week4;
 
+import java.util.Arrays;
+
 /**
  * Bag of Tokens
  * You have an initial power of P, an initial score of 0, and a bag of tokens where tokens[i] is the value of the ith
@@ -48,12 +50,56 @@ package com.example.leet.october.week4;
 public class Day24 {
 
     public static int bagOfTokensScore(int[] tokens, int P) {
+        Arrays.sort(tokens);
+        int lo = 0, hi = tokens.length - 1;
+        int points = 0, ans = 0;
+        while (lo <= hi && (P >= tokens[lo] || points > 0)) {
+            while (lo <= hi && P >= tokens[lo]) {
+                P -= tokens[lo++];
+                points++;
+            }
 
+            ans = Math.max(ans, points);
+            if (lo <= hi && points > 0) {
+                P += tokens[hi--];
+                points--;
+            }
+        }
+
+        return ans;
     }
 
     public static void main(String[] args) {
         System.out.println(bagOfTokensScore(new int[]{100}, 50));//0
         System.out.println(bagOfTokensScore(new int[]{100,200}, 150));//1
         System.out.println(bagOfTokensScore(new int[]{100,200,300,400}, 200));//2
+    }
+
+    public int bagOfTokensScore2(int[] tokens, int P) {
+        Arrays.sort(tokens);
+        int sum = 0;
+        for (int t : tokens) sum += t;
+
+        int score = 0;
+        int power = P;
+
+        int i = 0;
+        int j = tokens.length - 1;
+
+        while (i <= j) {
+            if (tokens[i] <= power) {
+                score ++;
+                power -= tokens[i];
+                i++;
+            } else if (score > 0 && tokens[i] < tokens[j] + power) {
+                power -= tokens[i];
+                power += tokens[j];
+                i++;
+                j--;
+            } else {
+                break;
+            }
+        }
+        return score;
     }
 }
