@@ -55,7 +55,17 @@ package com.example.leet.october.week4;
 public class Day25 {
 
     public static boolean winnerSquareGame(int n) {
+        boolean dp[] = new boolean[n + 1];
+        for(int i = 1; i <= n; i++) {
+            for(int j = 1; j * j <= i; j++) {
+                if(!dp[i - j * j]) {
+                    dp[i] =  true;
+                    break;
+                }
+            }
+        }
 
+        return dp[n];
     }
 
     public static void main(String[] args) {
@@ -63,6 +73,19 @@ public class Day25 {
         System.out.println(winnerSquareGame(2));//false
         System.out.println(winnerSquareGame(4));//true
         System.out.println(winnerSquareGame(7));//false
-        System.out.println(winnerSquareGame(17));//false
+        System.out.println(winnerSquareGame2(17));//false
+    }
+
+    public static boolean winnerSquareGame2(int n) {
+        boolean[] dp = new boolean[n + 1];
+        for (int i = 0; i <= n; i++){
+            if (dp[i]){
+                continue;
+            }
+            for (int k = 1; i + k * k <= n; k++){
+                dp[i+k*k] = true;
+            }
+        }
+        return dp[n];
     }
 }
