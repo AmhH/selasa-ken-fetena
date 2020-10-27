@@ -45,4 +45,59 @@ package com.example.leet.october.week4;
  * 0 <= query_glass <= query_row < 100
  */
 public class Day26 {
+
+    public static double champagneTower(int poured, int query_row, int query_glass) {
+        double[] res = new double[query_row + 2];
+        res[0] = poured;
+        for (int row = 1; row <= query_row; row++)
+            for (int i = row; i >= 0; i--)
+                res[i + 1] += res[i] = Math.max(0.0, (res[i] - 1) / 2);
+        return Math.min(res[query_glass], 1.0);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(champagneTower(1,1,1));
+        System.out.println(champagneTower(2,1,1));
+        System.out.println(champagneTower(100000009,33,17));
+    }
+
+    public double champagneTower1(int poured, int query_row, int query_glass) {
+        if (query_row == 0){
+            return Math.min(1, poured);
+        }
+        if (poured <= 1){
+            return 0;
+        }
+        var prev = new double[query_row + 1];
+        var cur = new double[query_row + 1];
+
+        var curRow = 1;
+        prev[0] = poured - 1;
+        var anyPositive = true;
+        while (curRow <= query_row && anyPositive){
+            anyPositive = false;
+            var start = query_glass - query_row + curRow;
+            start = start > 0 ? start : 0;
+            var end = query_glass > curRow ? curRow : query_glass;
+            for (var i = start; i <= end; i++) {
+                var p = 0.0;
+                if (i - 1 >= 0 && prev[i - 1] > 0) {
+                    p += prev[i - 1] / 2;
+                }
+                if (i < curRow && prev[i] > 0) {
+                    p += prev[i] / 2;
+                }
+                cur[i] = p - 1;
+                anyPositive = anyPositive || (p > 1);
+            }
+            var t = cur;
+            cur = prev;
+            prev = t;
+            curRow += 1;
+        }
+        if (!anyPositive && curRow <= query_row) {
+            return .0;
+        }
+        return Math.min(1, prev[query_glass] + 1);
+    }
 }
