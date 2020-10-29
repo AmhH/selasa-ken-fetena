@@ -1,0 +1,9 @@
+Hat, 15.00
+TeddyBear, 25.75
+Speaker, 59.99
+Necklace, 129.95
+Chair, 145.99
+Sports Equipment, 209.25
+Video Game System, 295.95
+Television, 495.00
+Heater, 995.00
