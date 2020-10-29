@@ -12,10 +12,7 @@ package com.example.leet.october.week4;
  * Return that maximum distance to the closest person.
  *
  *
- *
  * Example 1:
- *
- *
  * Input: seats = [1,0,0,0,1,0,1]
  * Output: 2
  * Explanation:
@@ -43,7 +40,30 @@ package com.example.leet.october.week4;
  * At least one seat is occupied.
  */
 public class Day29 {
-    public int maxDistToClosest(int[] seats) {
+    public static int maxDistToClosest(int[] seats) {
+        int length = seats.length;
+        int prev = -1, future = 0;
+        int max = 0;
 
+        for (int i = 0; i < length; ++i) {
+            if (seats[i] == 1) {
+                prev = i;
+            } else {
+                while (future < length && seats[future] == 0 || future < i)
+                    future++;
+
+                int left = prev == -1 ? length : i - prev;
+                int right = future == length ? length : future - i;
+                max = Math.max(max, Math.min(left, right));
+            }
+        }
+
+        return max;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(maxDistToClosest(new int[]{1,0,0,0,1,0,1}));
+        System.out.println(maxDistToClosest(new int[]{1,0,0,0}));
+        System.out.println(maxDistToClosest(new int[]{0,1}));
     }
 }
