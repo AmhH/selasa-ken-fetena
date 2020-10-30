@@ -1,4 +1,4 @@
-package com.example.leet.october.week4;
+package com.example.leet.october.week5;
 
 /**
  * Maximize Distance to Closest Person
