@@ -22,7 +22,11 @@ import com.example.leet.util.TreeNode;
  * Output: [3,1,null,null,2]
  * Explanation: 3 cannot be a left child of 1 because 3 > 1. Swapping 1 and 3 makes the BST valid.
  * Example 2:
- *
+ *      3                2
+ *    /  \             /  \
+ *   1    4    =>    1     4
+ *       /                /
+ *      2                3
  *
  * Input: root = [3,1,4,null,null,2]
  * Output: [2,1,4,null,null,3]
@@ -35,8 +39,29 @@ import com.example.leet.util.TreeNode;
  * -231 <= Node.val <= 231 - 1
  */
 public class Day31 {
+    private TreeNode prev;
+    private TreeNode wrong1;
+    private TreeNode wrong2;
 
     public void recoverTree(TreeNode root) {
+        inOrder(root);
 
+        int val = wrong1.val;
+        wrong1.val = wrong2.val;
+        wrong2.val = val;
+    }
+
+    private void inOrder(TreeNode root) {
+        if(null == root)
+            return;
+        inOrder(root.left);
+
+        if(null != prev && prev.val > root.val){
+            if(null == wrong1)
+                wrong1 = prev;
+            wrong2 = root;
+        }
+        prev = root;
+        inOrder(root.right);
     }
 }
