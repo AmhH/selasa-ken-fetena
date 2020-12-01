@@ -66,4 +66,10 @@ public class Java9Test {
         Map<Double, Set<String>> collect = getBooks()
                 .collect(groupingBy(Book::getPrice, flatMapping(b -> b.getAuthors().stream(), toSet())));
     }
+
+    @Test
+    public void testChar(){
+        Character c = 'N';
+        System.out.println('Y' == c);
+    }
 }
