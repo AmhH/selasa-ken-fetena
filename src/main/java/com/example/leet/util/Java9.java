@@ -17,5 +17,7 @@ public class Java9 {
         //Java 9
         full.ifPresentOrElse(System.out::println, () -> System.out.println("Nothing here"));
         Optional.empty().ifPresentOrElse(System.out::println, () -> System.out.println("Nothing here"));
+
+
     }
 }

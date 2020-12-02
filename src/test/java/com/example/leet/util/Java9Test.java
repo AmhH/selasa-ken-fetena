@@ -2,9 +2,14 @@ package com.example.leet.util;
 
 import org.junit.Test;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -71,5 +76,35 @@ public class Java9Test {
     public void testChar(){
         Character c = 'N';
         System.out.println('Y' == c);
+    }
+
+    @Test
+    public void tryWithResources() throws FileNotFoundException {
+        try(FileInputStream fis = new FileInputStream("")){
+            fis.read();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        final FileInputStream fis2 = new FileInputStream("");
+        try(fis2){
+            fis2.read();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void date(){
+        LocalDate birthDay = LocalDate.of(1983, 12, 6);
+        long leap = birthDay.datesUntil(LocalDate.now(), Period.ofYears(1))
+                .map(date -> Year.of(date.getYear()))
+                .filter(Year::isLeap)
+                .count();
+
+        System.out.println("Leap year: " + leap);
     }
 }
