@@ -1,4 +1,4 @@
-package com.example.leet.util;
+package com.example.leet.java9;
 
 import java.util.Optional;
 
@@ -17,7 +17,5 @@ public class Java9 {
         //Java 9
         full.ifPresentOrElse(System.out::println, () -> System.out.println("Nothing here"));
         Optional.empty().ifPresentOrElse(System.out::println, () -> System.out.println("Nothing here"));
-
-
     }
 }

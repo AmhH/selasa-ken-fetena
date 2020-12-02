@@ -1,5 +1,6 @@
 package com.example.leet.util;
 
+import com.example.leet.java9.Book;
 import org.junit.Test;
 
 import java.io.FileInputStream;
@@ -10,15 +11,13 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.Year;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.example.leet.util.Book.getBook;
-import static com.example.leet.util.Book.getBooks;
+import static com.example.leet.java9.Book.getBook;
+import static com.example.leet.java9.Book.getBooks;
 import static java.util.stream.Collectors.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -61,9 +60,9 @@ public class Java9Test {
 
     @Test
     public void testCollectorsFiltering() {
-        Set<Book> collect = getBooks().collect(filtering(b -> b.getPrice() > 10, toSet()));
-        Map<Set<String>, Set<Book>> books = getBooks()
-                .collect(groupingBy(Book::getAuthors, filtering(b -> b.getPrice() > 10, toSet())));
+        Set<com.example.leet.java9.Book> collect = getBooks().collect(filtering(b -> b.getPrice() > 10, toSet()));
+        Map<Set<String>, Set<com.example.leet.java9.Book>> books = getBooks()
+                .collect(groupingBy(com.example.leet.java9.Book::getAuthors, filtering(b -> b.getPrice() > 10, toSet())));
     }
 
     @Test
@@ -106,5 +105,15 @@ public class Java9Test {
                 .count();
 
         System.out.println("Leap year: " + leap);
+    }
+
+    @Test
+    public void processHandle(){
+        Process p = null;
+        ProcessHandle processHandle = p.toHandle();
+        ProcessHandle.Info info = processHandle.info();
+        info.totalCpuDuration();
+        ProcessHandle ph;
+        long pid = ProcessHandle.current().pid();
     }
 }
