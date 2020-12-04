@@ -1,7 +1,6 @@
 package com.example.leet.java10;
 
-import java.time.Duration;
-import java.time.Instant;
+import java.io.Serializable;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -20,8 +19,6 @@ public class LocalVariable {
         //var nums1 = {1,2,3}; not enough information
         var strs = List.of(hi);
         var copy = List.copyOf(strs);
-
-        Duration.between(Instant.now(), Instant.now());
-
+        var list = List.of(1, 2, "Hi");
     }
 }
