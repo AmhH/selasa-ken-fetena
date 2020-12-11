@@ -1,6 +1,5 @@
 package com.example.leet.java10;
 
-import java.util.Optional;
 import java.util.PriorityQueue;
 
 public class TestTMo {
@@ -8,7 +7,6 @@ public class TestTMo {
   public static void main(String[] args) {
     long t = getKey(310l);
     System.out.println(t);
-    Optional<Integer> integer = Optional.of(3);
   }
 
   private static long getKey(long l) {
