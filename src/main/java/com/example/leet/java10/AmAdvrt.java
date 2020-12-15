@@ -78,13 +78,15 @@ public class AmAdvrt {
     int[] count2 = new int[26];
     for (int i = 0; i < new1.length; i++){
       count1[new1[i] - 'a']++;
-      count1[new2[i] - 'a']++;
+      count2[new2[i] - 'a']++;
     }
 
     for (int i = 0; i < count1.length; i++){
-      if(count1[i] != count1[i])
+      if(count1[i] != count2[i])
         return false;
     }
+    StringBuilder builder = new StringBuilder();
+    builder.length();
     return true;
   }
 
